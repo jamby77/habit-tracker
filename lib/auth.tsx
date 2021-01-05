@@ -33,6 +33,10 @@ function useProvideAuth() {
       .then((response) => {
         setUser(response.user);
         return response.user;
+      })
+      .catch((e) => {
+        debugger;
+        console.error(e);
       });
   };
 
