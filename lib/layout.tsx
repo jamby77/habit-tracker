@@ -17,7 +17,7 @@ export function useProvideLayout() {
   };
 }
 
-export const ProviderLayout: React.FC = ({ children }) => {
+export const LayoutProvider: React.FC = ({ children }) => {
   const layout = useProvideLayout();
   return (
     <layoutContext.Provider value={layout}>{children}</layoutContext.Provider>
