@@ -1,8 +1,9 @@
 import { AppProps } from "next/app";
-import "tailwindcss/tailwind.css";
 import { ProvideAuth } from "../lib/auth";
 import { ProviderLayout } from "../lib/layout";
 import Layout from "../components/Layout";
+
+import "../styles/global.css";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
