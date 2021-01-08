@@ -52,9 +52,6 @@ const Daily = () => {
   return (
     <div className="py-4 px-4 sm:px-8 overflow-hidden h-screen w-screen">
       <h2 className="text-3xl text-center py-4">Daily habits</h2>
-      <div className="flex justify-center">
-        <Logo />
-      </div>
       <div className="overflow-x-auto w-full h-full border-8 border-red-50">
         <div className="flex flex-col">
           <div className="flex flex-col">
