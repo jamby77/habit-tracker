@@ -11,7 +11,17 @@ const HeadingMobile: React.FC = () => {
           <Logo />
         </a>
       </Link>
-
+      <nav className="flex flex-row gap-10">
+        <Link href="/weekly">
+          <a>Weekly</a>
+        </Link>{" "}
+        <Link href="/monthly">
+          <a>Monthly</a>
+        </Link>
+        <Link href="/signin">
+          <a>Sign In/Up</a>
+        </Link>
+      </nav>
       <button className="active:bg-green-50 focus:outline-white w-12 h-12 flex items-center justify-center flex-grow-0 focus:ring-2 focus:ring-green-200 focus:ring-opacity-50 rounded-full">
         <span className="w-8 h-8 text-green-600">
           <Plus className="stroke-current fill-current" />

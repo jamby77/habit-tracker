@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useLayout } from "../lib/layout";
 
 const Home = () => {
@@ -7,10 +6,10 @@ const Home = () => {
   setTitle("Dashboard");
   return (
     <div className="h-full w-full">
-      <h1 className="text-3xl font-bold text-center py-4 ">Habit tracker</h1>
-      <Link href="/weekly">
-        <a>Weekly</a>
-      </Link>
+      <h1 className="text-3xl font-bold text-center py-4">Habit tracker</h1>
+      <div className="text-center">
+        <pre>TODO: dashboard here</pre>
+      </div>
     </div>
   );
 };
