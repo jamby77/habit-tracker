@@ -30,7 +30,9 @@ const DisplayHabits = ({ type }: { type: HabitDisplayType }) => {
   });
   return (
     <div className="py-4 px-4 sm:px-8 overflow-hidden h-screen w-screen">
-      <h2 className="text-3xl text-center py-4">Daily habits (weekly)</h2>
+      <h2 className="text-3xl text-center py-4">{`Daily habits (${
+        type === "week" ? "weekly" : "monthly"
+      })`}</h2>
       <div className="tracker overflow-hidden w-full h-full border-8 border-red-50 flex flex-col">
         <div className="tracker-heading w-full flex flex-col px-4 gap-1">
           <div className="flex flex-row h-8 w-full">
