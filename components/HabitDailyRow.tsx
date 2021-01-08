@@ -9,7 +9,7 @@ const HabitDailyRow: React.FC<{
 }> = ({ habit, daysOfMonth }) => {
   return (
     <div className="flex flex-row flex-shrink-0">
-      <div className="w-1/2 sm:w-40 h-8 flex-shrink-0">{habit.name}</div>
+      <div className="w-1/2 sm:w-40 h-8 flex-shrink-0 line-clamp">{habit.name}</div>
       {daysOfMonth.map((day) => {
         const key = format(day, dateFormat);
         const done = habit.completed[key] === true;
