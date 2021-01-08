@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const layoutContext = createContext({
   title: "",
@@ -26,4 +26,11 @@ export const LayoutProvider: React.FC = ({ children }) => {
 
 export const useLayout = () => {
   return useContext(layoutContext);
+};
+
+export const useTitle = (title) => {
+  const { setTitle } = useLayout();
+  useEffect(() => {
+    setTitle(title);
+  }, []);
 };
