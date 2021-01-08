@@ -9,7 +9,10 @@ const HabitDailyRow: React.FC<{
 }> = ({ habit, days }) => {
   return (
     <div className="HabitDailyRow flex flex-row flex-shrink-0 bg-white p-4 gap-1 overflow-x-auto">
-      <div className="w-1/2 sm:w-40 h-8 flex-shrink-0 truncate static pr-4">
+      <div
+        className="w-1/2 sm:w-40 h-8 flex-shrink-0 truncate static pr-4"
+        title={habit.name}
+      >
         {habit.name}
       </div>
       <div className="flex flex-row flex-shrink-0 justify-between">
