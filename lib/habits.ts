@@ -12,6 +12,7 @@ export type HabitDisplayType = "week" | "month";
 export const getHabits = async () => {
   return habits;
 };
+
 const habits: Habit[] = [
   {
     name: "Drink 3l of water",

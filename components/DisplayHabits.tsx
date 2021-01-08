@@ -18,8 +18,12 @@ const DisplayHabits = ({ type }: { type: HabitDisplayType }) => {
   const today = startOfToday();
   const month = format(today, "MMMM");
   const week = format(today, "wo");
-  const start = type === "week" ? startOfWeek(today) : startOfMonth(today);
-  const end = type === "week" ? endOfWeek(today) : endOfMonth(today);
+  const start =
+    type === "week"
+      ? startOfWeek(today, { weekStartsOn: 1 })
+      : startOfMonth(today);
+  const end =
+    type === "week" ? endOfWeek(today, { weekStartsOn: 1 }) : endOfMonth(today);
   const days = eachDayOfInterval({
     start,
     end,

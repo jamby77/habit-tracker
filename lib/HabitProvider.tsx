@@ -3,9 +3,11 @@ import { getHabits, Habit } from "./habits";
 
 type HabitProviderType = {
   habits: Habit[];
+  toggleHabit: (habit: Habit, day: string) => void;
 };
 const habitsContext = React.createContext<HabitProviderType>({
   habits: [],
+  toggleHabit: (habit: Habit, day: string) => {},
 });
 
 const useHabitsProvider = () => {
@@ -15,8 +17,28 @@ const useHabitsProvider = () => {
       setHabits(serverHabits);
     });
   }, []);
+
+  const toggleHabit = (habit: Habit, day: string) => {
+    // change habit complete state
+    // every invocation rotate complete state
+    // undefined -> true -> false -> true -> false...
+    const completed = habit.completed[day] || false;
+    const updatedHabit: Habit = {
+      ...habit,
+      completed: { ...habit.completed, [day]: !completed },
+    };
+    const updatedHabits = habits.map((h) => {
+      if (h === habit) {
+        return updatedHabit;
+      }
+      return h;
+    });
+    setHabits(updatedHabits);
+  };
+
   return {
     habits,
+    toggleHabit,
   };
 };
 

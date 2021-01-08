@@ -1,7 +1,7 @@
 import React from "react";
-import cn from "clsx";
-import { format } from "date-fns";
+import { format, isAfter, startOfToday } from "date-fns";
 import { dateFormat, Habit } from "../lib/habits";
+import HabitDailyCell from "./HabitDailyCell";
 
 const HabitDailyRow: React.FC<{
   habit: Habit;
@@ -15,19 +15,14 @@ const HabitDailyRow: React.FC<{
       <div className="flex flex-row flex-shrink-0 justify-between">
         {days.map((day) => {
           const key = format(day, dateFormat);
-          const done = habit.completed[key] === true;
-          const skipped = habit.completed[key] === false;
-          const unknown = habit.completed[key] === undefined;
-          const className = {
-            "h-10 w-10 text-center flex items-center justify-center ": true,
-            "bg-green-500": done,
-            "bg-red-600": skipped,
-            "bg-gray-300": unknown,
-          };
+          const disabled = isAfter(day, startOfToday());
           return (
-            <button key={`${habit.name}-${key}`} className={cn(className)}>
-              {done ? "✔️" : skipped ? "💩" : "❓"}
-            </button>
+            <HabitDailyCell
+              habit={habit}
+              dateKey={key}
+              disabled={disabled}
+              key={key}
+            />
           );
         })}
       </div>
