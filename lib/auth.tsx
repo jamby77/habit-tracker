@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import queryString from "query-string";
 import firebase from "./firebase";
+import { createUser } from "./db";
 
 const authContext = createContext(null);
 
@@ -31,8 +32,10 @@ function useProvideAuth() {
     if (rawUser) {
       const user = formatUser(rawUser);
       if (create) {
+        createUser(user.uid, user).then(() => setUser(user));
+      } else {
+        setUser(user);
       }
-      setUser(user);
       return user;
     }
 
