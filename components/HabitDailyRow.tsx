@@ -19,7 +19,7 @@ const HabitDailyRow: React.FC<{
           const skipped = habit.completed[key] === false;
           const unknown = habit.completed[key] === undefined;
           const className = {
-            "h-8 text-center flex items-center justify-center": true,
+            "h-10 w-10 text-center flex items-center justify-center ": true,
             "bg-green-500": done,
             "bg-red-600": skipped,
             "bg-gray-300": unknown,
