@@ -1,8 +1,20 @@
 import { AppProps } from "next/app";
-import "../styles/globals.css";
+import { ProvideAuth } from "../lib/auth";
+import { ProviderLayout } from "../lib/layout";
+import Layout from "../components/Layout";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
-}
+import "../styles/global.css";
 
-export default MyApp;
+const App = ({ Component, pageProps }: AppProps) => {
+  return (
+    <ProvideAuth>
+      <ProviderLayout>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ProviderLayout>
+    </ProvideAuth>
+  );
+};
+
+export default App;
