@@ -3,8 +3,44 @@ import queryString from "query-string";
 import firebase from "./firebase";
 import { createUser } from "./db";
 import { useRouter } from "next/router";
+import { useLayout } from "./layout";
 
-const authContext = createContext(null);
+const authContext = createContext<{
+  user?: User;
+  signin?: (user: {
+    email: string;
+    password: string;
+  }) => Promise<
+    | {
+        uid: string;
+        firstName: string;
+        lastName: string;
+        provider: string;
+        name: string;
+        email: string;
+      }
+    | boolean
+  >;
+  signup?: (user: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+  }) => Promise<
+    | {
+        uid: string;
+        firstName: string;
+        lastName: string;
+        provider: string;
+        name: string;
+        email: string;
+      }
+    | boolean
+  >;
+  signout?: () => Promise<boolean>;
+  sendPasswordResetEmail?: (email: string) => Promise<boolean>;
+  confirmPasswordReset?: (password: string, code?: string) => Promise<boolean>;
+}>(null);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const auth = useProvideAuth();
@@ -44,12 +80,18 @@ const formatUser = (user: User) => {
 
 function useProvideAuth() {
   const [user, setUser] = useState(null);
+  const { error } = useLayout();
 
   const handleUser = (rawUser: User | false | null, create = false) => {
     if (rawUser) {
       const user = formatUser(rawUser);
       if (create) {
-        createUser(user.uid, user).then(() => setUser(user));
+        createUser(user.uid, user)
+          .then(() => setUser(user))
+          .catch((err) => {
+            console.dir(err);
+            error(err.message);
+          });
       } else {
         setUser(user);
       }
@@ -60,12 +102,17 @@ function useProvideAuth() {
     return false;
   };
 
-  const signin = (email, password) => {
+  const signin = ({ email, password }) => {
     return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
         return handleUser(response.user);
+      })
+      .catch((err) => {
+        console.dir(err);
+        error(err.message);
+        return false;
       });
   };
 
@@ -76,8 +123,10 @@ function useProvideAuth() {
       .then((response) => {
         return handleUser({ ...response.user, firstName, lastName }, true);
       })
-      .catch((e) => {
-        console.error(e);
+      .catch((err) => {
+        console.dir(err);
+        error(err.message);
+        return false;
       });
   };
 
@@ -87,6 +136,12 @@ function useProvideAuth() {
       .signOut()
       .then(() => {
         handleUser(false);
+        return true;
+      })
+      .catch((err) => {
+        console.dir(err);
+        error(err.message);
+        return false;
       });
   };
 
@@ -96,6 +151,11 @@ function useProvideAuth() {
       .sendPasswordResetEmail(email)
       .then(() => {
         return true;
+      })
+      .catch((err) => {
+        console.dir(err);
+        error(err.message);
+        return false;
       });
   };
 
@@ -107,6 +167,11 @@ function useProvideAuth() {
       .confirmPasswordReset(resetCode, password)
       .then(() => {
         return true;
+      })
+      .catch((err) => {
+        console.dir(err);
+        error(err.message);
+        return false;
       });
   };
 

@@ -9,7 +9,7 @@ const Warning = ({
 }) => {
   return (
     <div
-      className="bg-blue-100 border-l-4 border-blue-600 text-blue-900 p-4"
+      className="bg-blue-100 border-l-4 border-blue-600 text-blue-900 p-4 flex-grow"
       role="alert"
     >
       <p className="font-bold">{title}</p>
