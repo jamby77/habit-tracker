@@ -5,7 +5,7 @@ import Plus from "../svg/plus";
 import { useAuth } from "../lib/auth";
 
 const HeadingMobile: React.FC = () => {
-  const { user } = useAuth();
+  const { user, signout } = useAuth();
   return (
     <div className="bg-white shadow-lg flex flex-row justify-between px-4 py-2 items-center sm:px-8 sm:py-4">
       <Link href={"/"}>
@@ -35,9 +35,7 @@ const HeadingMobile: React.FC = () => {
             <a>Sign In/Up</a>
           </Link>
         ) : (
-          <Link href="/signout">
-            <a>Sign Out</a>
-          </Link>
+          <button onClick={() => signout()}>Sign Out</button>
         )}
       </nav>
       {user && (

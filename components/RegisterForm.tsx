@@ -4,12 +4,17 @@ import Icon from "./form/Icon";
 import Input from "./form/Input";
 import Button from "./form/Button";
 
-const RegisterForm = ({ onRegister }: { onRegister: (user) => void }) => {
+const RegisterForm = ({
+  onRegister,
+  submitting = false,
+}: {
+  onRegister: (user) => void;
+  submitting: boolean;
+}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = () => {
     const user = { firstName, lastName, email, password };
@@ -17,7 +22,6 @@ const RegisterForm = ({ onRegister }: { onRegister: (user) => void }) => {
       console.info("Missing required data", user);
       return;
     }
-    setSubmitting(true);
     onRegister(user);
   };
   return (
@@ -100,7 +104,7 @@ const RegisterForm = ({ onRegister }: { onRegister: (user) => void }) => {
         <div className="flex -mx-3">
           <div className="w-full px-3 mb-5">
             <Button onClick={handleSubmit} disabled={submitting}>
-              REGISTER NOW
+              Register Now
             </Button>
           </div>
         </div>

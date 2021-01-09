@@ -5,6 +5,7 @@ import Button from "../components/form/Button";
 import { useAuth } from "../lib/auth";
 import OutlineButton from "../components/form/OutlineButton";
 import { useRouter } from "next/router";
+import Notification, { NotificationType } from "../components/Notification";
 
 const LOGIN = false;
 const REGISTER = true;
@@ -13,6 +14,7 @@ const Signin = () => {
   const { signup, signin, user } = useAuth();
   const router = useRouter();
   const [loginOrRegister, setLogin] = useState(LOGIN);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -56,15 +58,39 @@ const Signin = () => {
             </OutlineButton>
           )}
         </div>
+        {submitting && (
+          <div className="flex flex-row w-full pt-10 px-5 md:px-10">
+            <Notification
+              message="Your info is on the way"
+              type={NotificationType.Info}
+            />
+          </div>
+        )}
         <div className="md:flex w-full">
           {loginOrRegister === REGISTER && (
             <RegisterForm
               onRegister={(user) => {
-                signup(user);
+                setSubmitting(true);
+                signup(user).then((result) => {
+                  if (!result) {
+                    setSubmitting(false);
+                  }
+                });
               }}
             />
           )}
-          {loginOrRegister === LOGIN && <LoginForm />}
+          {loginOrRegister === LOGIN && (
+            <LoginForm
+              onLogin={(user) => {
+                setSubmitting(true);
+                signin(user).then((result) => {
+                  if (!result) {
+                    setSubmitting(false);
+                  }
+                });
+              }}
+            />
+          )}
         </div>
       </div>
     </div>

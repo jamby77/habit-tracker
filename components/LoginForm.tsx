@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import Label from "./form/Label";
 import Icon from "./form/Icon";
 import Input from "./form/Input";
 import Button from "./form/Button";
 
-const LoginForm = () => {
+const LoginForm = ({
+  onLogin,
+  submitting = false,
+}: {
+  onLogin: (user) => void;
+  submitting: boolean;
+}) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleSubmit = () => {
+    const user = { email, password };
+    if (!email || !password) {
+      console.info("Missing required data", user);
+      return;
+    }
+    onLogin(user);
+  };
   return (
     <div className="w-full py-10 px-5 md:px-10">
       <div className="text-center mb-10">
@@ -22,6 +38,10 @@ const LoginForm = () => {
                 id="email"
                 name="email"
                 placeholder="johnsmith@example.com"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
             </div>
           </div>
@@ -36,13 +56,19 @@ const LoginForm = () => {
                 id="password"
                 name="password"
                 placeholder="************"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
             </div>
           </div>
         </div>
         <div className="flex -mx-3">
           <div className="w-full px-3 mb-5">
-            <Button>Log In</Button>
+            <Button onClick={handleSubmit} disabled={submitting}>
+              Log In
+            </Button>
           </div>
         </div>
       </div>
