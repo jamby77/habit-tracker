@@ -12,9 +12,7 @@ const Layout: React.FC = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HeadingMobile />
-      <main className="flex flex-col h-screen container bg-red-50">
-        {children}
-      </main>
+      <main className="flex flex-col w-full h-full bg-red-50">{children}</main>
     </>
   );
 };

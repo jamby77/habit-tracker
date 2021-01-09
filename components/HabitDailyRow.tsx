@@ -15,7 +15,7 @@ const HabitDailyRow: React.FC<{
       >
         {habit.name}
       </div>
-      <div className="flex flex-row flex-shrink-0 justify-between">
+      <div className="flex flex-row flex-shrink-0 justify-between flex-grow">
         {days.map((day) => {
           const key = format(day, dateFormat);
           const disabled = isAfter(day, startOfToday());
