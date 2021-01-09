@@ -3,7 +3,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
 html {
     min-width: 360px;
     scroll-behavior: smooth;
@@ -13,6 +16,7 @@ html {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    height: 100%;
 }
 
 svg {
