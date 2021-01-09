@@ -69,6 +69,7 @@ const Signin = () => {
         <div className="md:flex w-full">
           {loginOrRegister === REGISTER && (
             <RegisterForm
+              submitting={submitting}
               onRegister={(user) => {
                 setSubmitting(true);
                 signup(user).then((result) => {
@@ -81,6 +82,7 @@ const Signin = () => {
           )}
           {loginOrRegister === LOGIN && (
             <LoginForm
+              submitting={submitting}
               onLogin={(user) => {
                 setSubmitting(true);
                 signin(user).then((result) => {
