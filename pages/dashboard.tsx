@@ -1,5 +1,6 @@
 import { useTitle } from "../lib/layout";
 import { useUser } from "../lib/auth";
+import { Error, Info, Success, Warning } from "../components/alerts";
 
 const Dashboard = () => {
   useTitle("Dashboard");
@@ -11,7 +12,10 @@ const Dashboard = () => {
     <div className="h-full w-full">
       <h1 className="text-3xl font-bold text-center py-4">Dashboard</h1>
       <div className="text-center">
-        <pre>TODO: dashboard here</pre>
+        <Info message={"Sample info"} />
+        <Success message={"Sample Success"} />
+        <Warning message={"Sample warning"} />
+        <Error message={"Sample error"} />
       </div>
     </div>
   );
