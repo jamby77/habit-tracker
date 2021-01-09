@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import Label from "./form/Label";
 import Icon from "./form/Icon";
 import Input from "./form/Input";
 import Button from "./form/Button";
 
-const RegisterForm = () => {
+const RegisterForm = ({ onRegister }: { onRegister: (user) => void }) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = () => {
+    const user = { firstName, lastName, email, password };
+    if (!firstName || !lastName || !email || !password) {
+      console.info("Missing required data", user);
+      return;
+    }
+    setSubmitting(true);
+    onRegister(user);
+  };
   return (
     <div className="w-full py-10 px-5 md:px-10">
       <div className="text-center mb-10">
@@ -22,6 +37,10 @@ const RegisterForm = () => {
                 name="first-name"
                 type="text"
                 placeholder="John"
+                value={firstName}
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
               />
             </div>
           </div>
@@ -34,6 +53,10 @@ const RegisterForm = () => {
                 id="last-name"
                 name="last-name"
                 placeholder="Smith"
+                value={lastName}
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                }}
               />
             </div>
           </div>
@@ -48,6 +71,10 @@ const RegisterForm = () => {
                 id="email"
                 name="email"
                 placeholder="johnsmith@example.com"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
             </div>
           </div>
@@ -62,13 +89,19 @@ const RegisterForm = () => {
                 id="password"
                 name="password"
                 placeholder="************"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
             </div>
           </div>
         </div>
         <div className="flex -mx-3">
           <div className="w-full px-3 mb-5">
-            <Button>REGISTER NOW</Button>
+            <Button onClick={handleSubmit} disabled={submitting}>
+              REGISTER NOW
+            </Button>
           </div>
         </div>
       </div>

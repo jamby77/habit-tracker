@@ -26,21 +26,26 @@ export const useUser = () => {
   return user;
 };
 
-const formatUser = (user: firebase.User) => {
+export interface User extends firebase.User {
+  firstName?: string;
+  lastName?: string;
+}
+
+const formatUser = (user: User) => {
   return {
     uid: user.uid,
     email: user.email,
     name: user.displayName,
+    firstName: user.firstName,
+    lastName: user.lastName,
     provider: user.providerData[0].providerId,
   };
 };
+
 function useProvideAuth() {
   const [user, setUser] = useState(null);
 
-  const handleUser = (
-    rawUser: firebase.User | false | null,
-    create = false
-  ) => {
+  const handleUser = (rawUser: User | false | null, create = false) => {
     if (rawUser) {
       const user = formatUser(rawUser);
       if (create) {
@@ -64,12 +69,12 @@ function useProvideAuth() {
       });
   };
 
-  const signup = (email, password) => {
+  const signup = ({ email, password, firstName, lastName }) => {
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
-        return handleUser(response.user, true);
+        return handleUser({ ...response.user, firstName, lastName }, true);
       })
       .catch((e) => {
         console.error(e);
