@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, createContext } from "react";
 import queryString from "query-string";
 import firebase from "./firebase";
 import { createUser } from "./db";
+import { useRouter } from "next/router";
 
 const authContext = createContext(null);
 
@@ -12,6 +13,17 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 export const useAuth = () => {
   return useContext(authContext);
+};
+
+export const useUser = () => {
+  const { user } = useAuth();
+  const router = useRouter();
+  useEffect(() => {
+    if (!user) {
+      router.push("/signin");
+    }
+  }, [user]);
+  return user;
 };
 
 const formatUser = (user: firebase.User) => {
@@ -42,6 +54,7 @@ function useProvideAuth() {
     setUser(false);
     return false;
   };
+
   const signin = (email, password) => {
     return firebase
       .auth()
