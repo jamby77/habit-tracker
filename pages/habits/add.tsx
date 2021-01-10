@@ -1,4 +1,6 @@
+import { nanoid } from "nanoid";
 import React, { useState } from "react";
+import slug from "slug";
 import {
   Container,
   FormContainer,
@@ -10,7 +12,8 @@ import {
 import { Button, Icon, Input, Label, Textarea } from "../../components/form";
 import Select from "../../components/form/Select";
 import { useUser } from "../../lib/auth";
-import { useTitle } from "../../lib/layout";
+import { addHabit } from "../../lib/habits";
+import { useLayout, useTitle } from "../../lib/layout";
 
 export const Occurrence = {
   Daily: "d",
@@ -18,22 +21,33 @@ export const Occurrence = {
   Monthly: "m",
   Yearly: "y",
 };
-
+const baseHabit = {
+  uid: "",
+  name: "",
+  description: "",
+  occurrence: Occurrence.Daily,
+  slug: "",
+  completed: {},
+};
 const Add = () => {
   const user = useUser();
+  const { success } = useLayout();
   useTitle("Add Habit");
   const [submitting, setSubmitting] = useState(false);
-  const [habit, setHabit] = useState({
-    uid: "",
-    name: "",
-    description: "",
-    occurrence: Occurrence.Daily,
-  });
+
+  const [habit, setHabit] = useState(baseHabit);
 
   const handleSubmit = () => {
     setSubmitting(true);
     const userHabit = { ...habit, uid: user.uid };
+    userHabit.slug = `${slug(userHabit.name)}-${nanoid(5)}`;
     console.log(userHabit);
+    addHabit(userHabit).then((result) => {
+      console.table(result);
+      success(`${result.name} added! Do you want to add another one?`);
+      setHabit({ ...baseHabit });
+      setSubmitting(false);
+    });
   };
   return (
     <Container>

@@ -56,7 +56,6 @@ export const useUser = (redirectTo?: string) => {
   const router = useRouter();
   const path = router.pathname;
   useEffect(() => {
-    console.table(router);
     if (!user) {
       router.push("/signin");
     } else {
