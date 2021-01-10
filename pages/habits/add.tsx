@@ -1,15 +1,51 @@
-import React from "react";
-import Container from "../../components/Container";
-import Panel from "../../components/Panel";
-import Heading1 from "../../components/Heading1";
-import FormContainer from "../../components/FormContainer";
+import React, { useState } from "react";
+import {
+  Container,
+  FormContainer,
+  FormGroup,
+  FormRow,
+  Heading1,
+  Panel,
+} from "../../components";
+import { Button, Icon, Input, Label, Textarea } from "../../components/form";
 
 const Add = () => {
+  const [submitting, setSubmitting] = useState(false);
+  const handleSubmit = () => {
+    setSubmitting(true);
+  };
   return (
     <Container>
-      <Panel>
+      <Panel className="mx-10">
         <FormContainer>
-          <Heading1 className="text-center">Add habit</Heading1>
+          <div className="text-center mb-10">
+            <Heading1 className="text-center">Add habit</Heading1>
+            <p>Enter habit details and save it</p>
+          </div>
+          <FormRow>
+            <FormGroup>
+              <Label htmlFor="habitName">Habit name *</Label>
+              <div className="flex">
+                <Icon icon="mdi-debug-step-over" />
+                <Input placeholder="Drink 3l of water" />
+              </div>
+            </FormGroup>
+          </FormRow>
+          <FormRow>
+            <FormGroup>
+              <Label htmlFor="habitName">Habit description</Label>
+              <div className="flex">
+                <Textarea placeholder="Drink at least 3l of water during the day" />
+              </div>
+            </FormGroup>
+          </FormRow>
+          <FormRow>
+            <FormGroup>
+              <Button onClick={handleSubmit} disabled={submitting}>
+                Save habit
+              </Button>
+            </FormGroup>
+          </FormRow>
         </FormContainer>
       </Panel>
     </Container>

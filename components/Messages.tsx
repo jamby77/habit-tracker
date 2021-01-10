@@ -8,7 +8,7 @@ const Messages = () => {
     return null;
   }
   return (
-    <div className="flex flex-col w-full">
+    <div className="Messages flex flex-col w-full">
       {messages.map((m, idx) => {
         return (
           <div

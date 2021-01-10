@@ -1,6 +1,5 @@
-import React, { ReactNode } from "react";
 import cn from "clsx";
-import { ReactFCWithClassName } from "./index";
+import React, { ReactNode } from "react";
 
 const FromGroup = ({
   children,
@@ -13,7 +12,10 @@ const FromGroup = ({
   full?: boolean;
 }) => {
   return (
-    <div {...rest} className={cn("px-3 mb-5", { "w-full": full }, className)}>
+    <div
+      {...rest}
+      className={cn("FromGroup px-3 mb-5", { "w-full": full }, className)}
+    >
       {children}
     </div>
   );

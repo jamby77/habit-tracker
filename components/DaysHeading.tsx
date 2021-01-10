@@ -1,9 +1,9 @@
-import React from "react";
 import { format } from "date-fns";
+import React from "react";
 
 const DaysHeading = ({ days = [] }) => {
   return (
-    <div className="flex flex-row justify-between flex-grow">
+    <div className="DaysHeading flex flex-row justify-between flex-grow">
       {days.map((day) => {
         return (
           <div
