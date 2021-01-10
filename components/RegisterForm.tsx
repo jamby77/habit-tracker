@@ -31,7 +31,7 @@ const RegisterForm = ({
         <Heading1>Register</Heading1>
         <p>Enter your information to register</p>
       </div>
-      <FormRow>
+      <div>
         <FormRow>
           <FormGroup full={false} className="w-1/2">
             <Label htmlFor="first-name">First name</Label>
@@ -109,7 +109,7 @@ const RegisterForm = ({
             </Button>
           </FormGroup>
         </FormRow>
-      </FormRow>
+      </div>
     </FormContainer>
   );
 };
