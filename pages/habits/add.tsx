@@ -8,6 +8,7 @@ import {
   Panel,
 } from "../../components";
 import { Button, Icon, Input, Label, Textarea } from "../../components/form";
+import Select from "../../components/form/Select";
 
 const Add = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -36,6 +37,20 @@ const Add = () => {
               <Label htmlFor="habitName">Habit description</Label>
               <div className="flex">
                 <Textarea placeholder="Drink at least 3l of water during the day" />
+              </div>
+            </FormGroup>
+          </FormRow>
+          <FormRow>
+            <FormGroup>
+              <Label htmlFor="habitName">Habit occurs</Label>
+              <div className="flex">
+                <Select
+                  className=""
+                  placeholder="Select habit occurrence"
+                  name="habitOccurrence"
+                  value={"Daily"}
+                  options={["Daily", "Weekly", "Monthly", "Yearly"]}
+                />
               </div>
             </FormGroup>
           </FormRow>
