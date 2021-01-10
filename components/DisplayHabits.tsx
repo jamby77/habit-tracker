@@ -48,6 +48,7 @@ const DisplayHabits = ({ type }: { type: HabitDisplayType }) => {
         </div>
         <div className="tracker-body flex flex-col gap-1 w-full">
           {habits.map((habit) => {
+            console.log(habit);
             return <HabitDailyRow key={habit.name} days={days} habit={habit} />;
           })}
         </div>
