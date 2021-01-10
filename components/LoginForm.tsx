@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-import Label from "./form/Label";
-import Icon from "./form/Icon";
-import Input from "./form/Input";
-import Button from "./form/Button";
 import Heading1 from "./Heading1";
 import FormContainer from "./FormContainer";
 import FormRow from "./FormRow";
 import FormGroup from "./FormGroup";
-import FromGroup from "./FormGroup";
+import { Button, Icon, Input, Label } from "./form";
 
 const LoginForm = ({
   onLogin,
@@ -34,7 +30,7 @@ const LoginForm = ({
       </div>
       <div>
         <FormRow>
-          <FromGroup>
+          <FormGroup>
             <Label htmlFor="email">Email</Label>
             <div className="flex">
               <Icon icon={"mdi-email-outline"} />
@@ -49,10 +45,10 @@ const LoginForm = ({
                 }}
               />
             </div>
-          </FromGroup>
+          </FormGroup>
         </FormRow>
         <FormRow>
-          <FromGroup className="mb-12">
+          <FormGroup className="mb-12">
             <Label htmlFor="password">Password</Label>
             <div className="flex">
               <Icon icon={"mdi-lock-outline"} />
@@ -67,7 +63,7 @@ const LoginForm = ({
                 }}
               />
             </div>
-          </FromGroup>
+          </FormGroup>
         </FormRow>
         <FormRow>
           <FormGroup>
