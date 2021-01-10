@@ -1,12 +1,12 @@
-import React from "react";
 import cn from "clsx";
+import React from "react";
 
 const Button = (props) => {
   const className = props.className || "";
   const buttonClasses = `
 block 
 w-full
-max-w-xs
+max-w-full
 mx-auto 
 bg-indigo-500 
 border-2

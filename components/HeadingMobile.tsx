@@ -13,7 +13,7 @@ const HeadingMobile: React.FC = () => {
           <Logo />
         </a>
       </Link>
-      <nav className="flex flex-row gap-10">
+      <nav className="sm:flex flex-row gap-10 hidden ">
         <Link href="/">
           <a>Home</a>
         </Link>

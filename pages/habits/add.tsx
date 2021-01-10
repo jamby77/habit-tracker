@@ -16,7 +16,7 @@ const Add = () => {
   };
   return (
     <Container>
-      <Panel className="mx-10">
+      <Panel className="mx-4 sm:mx-10">
         <FormContainer>
           <div className="text-center mb-10">
             <Heading1 className="text-center">Add habit</Heading1>
