@@ -6,6 +6,8 @@ import { useAuth } from "../lib/auth";
 import OutlineButton from "../components/form/OutlineButton";
 import { useRouter } from "next/router";
 import Notification, { NotificationType } from "../components/Notification";
+import Container from "../components/Container";
+import Panel from "../components/Panel";
 
 const LOGIN = false;
 const REGISTER = true;
@@ -22,11 +24,8 @@ const Signin = () => {
     }
   }, [user]);
   return (
-    <div className="min-w-full min-h-full w-full h-full bg-red-100 flex items-center justify-center">
-      <div
-        className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden"
-        style={{ maxWidth: "400px", minHeight: "630px" }}
-      >
+    <Container>
+      <Panel className="login-panel">
         <div className="flex flex-row w-full pt-10 px-5 md:px-10">
           {loginOrRegister === REGISTER ? (
             <Button
@@ -94,8 +93,8 @@ const Signin = () => {
             />
           )}
         </div>
-      </div>
-    </div>
+      </Panel>
+    </Container>
   );
 };
 

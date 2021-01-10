@@ -3,6 +3,11 @@ import Label from "./form/Label";
 import Icon from "./form/Icon";
 import Input from "./form/Input";
 import Button from "./form/Button";
+import Heading1 from "./Heading1";
+import FormContainer from "./FormContainer";
+import FromRow from "./FormRow";
+import FormGroup from "./FormGroup";
+import FromGroup from "./FormGroup";
 
 const RegisterForm = ({
   onRegister,
@@ -25,14 +30,14 @@ const RegisterForm = ({
     onRegister(user);
   };
   return (
-    <div className="w-full py-10 px-5 md:px-10">
+    <FormContainer>
       <div className="text-center mb-10">
-        <h1 className="font-bold text-3xl text-gray-900 uppercase">Register</h1>
+        <Heading1>Register</Heading1>
         <p>Enter your information to register</p>
       </div>
-      <div>
-        <div className="flex -mx-3">
-          <div className="w-1/2 px-3 mb-5">
+      <FromRow>
+        <FromRow>
+          <FormGroup full={false} className="w-1/2">
             <Label htmlFor="first-name">First name</Label>
             <div className="flex">
               <Icon icon={"mdi-account-outline"} />
@@ -47,8 +52,8 @@ const RegisterForm = ({
                 }}
               />
             </div>
-          </div>
-          <div className="w-1/2 px-3 mb-5">
+          </FormGroup>
+          <FormGroup full={false} className="w-1/2">
             <Label htmlFor="last-name">Last name</Label>
             <div className="flex">
               <Icon icon={"mdi-account-outline"} />
@@ -63,10 +68,10 @@ const RegisterForm = ({
                 }}
               />
             </div>
-          </div>
-        </div>
-        <div className="flex -mx-3">
-          <div className="w-full px-3 mb-5">
+          </FormGroup>
+        </FromRow>
+        <FromRow>
+          <FormGroup>
             <Label htmlFor="email">Email</Label>
             <div className="flex">
               <Icon icon={"mdi-email-outline"} />
@@ -81,10 +86,10 @@ const RegisterForm = ({
                 }}
               />
             </div>
-          </div>
-        </div>
-        <div className="flex -mx-3">
-          <div className="w-full px-3 mb-12">
+          </FormGroup>
+        </FromRow>
+        <FromRow>
+          <FormGroup className="mb-12">
             <Label htmlFor="password">Password</Label>
             <div className="flex">
               <Icon icon={"mdi-lock-outline"} />
@@ -99,17 +104,17 @@ const RegisterForm = ({
                 }}
               />
             </div>
-          </div>
-        </div>
-        <div className="flex -mx-3">
-          <div className="w-full px-3 mb-5">
+          </FormGroup>
+        </FromRow>
+        <FromRow>
+          <FromGroup>
             <Button onClick={handleSubmit} disabled={submitting}>
               Register Now
             </Button>
-          </div>
-        </div>
-      </div>
-    </div>
+          </FromGroup>
+        </FromRow>
+      </FromRow>
+    </FormContainer>
   );
 };
 
