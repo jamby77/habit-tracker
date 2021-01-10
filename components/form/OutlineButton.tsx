@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "clsx";
 
-const Button = (props) => {
+const OutlineButton = (props) => {
   const className = props.className || "";
   const buttonClasses = `
 block 
@@ -25,4 +25,4 @@ font-semibold`;
   return <button {...props} className={cn(buttonClasses, className)} />;
 };
 
-export default Button;
+export default OutlineButton;

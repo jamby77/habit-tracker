@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-import Label from "./form/Label";
-import Icon from "./form/Icon";
-import Input from "./form/Input";
-import Button from "./form/Button";
 import Heading1 from "./Heading1";
 import FormContainer from "./FormContainer";
-import FromRow from "./FormRow";
+import FormRow from "./FormRow";
 import FormGroup from "./FormGroup";
-import FromGroup from "./FormGroup";
+import { Button, Icon, Input, Label } from "./form";
 
 const RegisterForm = ({
   onRegister,
@@ -35,8 +31,8 @@ const RegisterForm = ({
         <Heading1>Register</Heading1>
         <p>Enter your information to register</p>
       </div>
-      <FromRow>
-        <FromRow>
+      <FormRow>
+        <FormRow>
           <FormGroup full={false} className="w-1/2">
             <Label htmlFor="first-name">First name</Label>
             <div className="flex">
@@ -69,8 +65,8 @@ const RegisterForm = ({
               />
             </div>
           </FormGroup>
-        </FromRow>
-        <FromRow>
+        </FormRow>
+        <FormRow>
           <FormGroup>
             <Label htmlFor="email">Email</Label>
             <div className="flex">
@@ -87,8 +83,8 @@ const RegisterForm = ({
               />
             </div>
           </FormGroup>
-        </FromRow>
-        <FromRow>
+        </FormRow>
+        <FormRow>
           <FormGroup className="mb-12">
             <Label htmlFor="password">Password</Label>
             <div className="flex">
@@ -105,15 +101,15 @@ const RegisterForm = ({
               />
             </div>
           </FormGroup>
-        </FromRow>
-        <FromRow>
-          <FromGroup>
+        </FormRow>
+        <FormRow>
+          <FormGroup>
             <Button onClick={handleSubmit} disabled={submitting}>
               Register Now
             </Button>
-          </FromGroup>
-        </FromRow>
-      </FromRow>
+          </FormGroup>
+        </FormRow>
+      </FormRow>
     </FormContainer>
   );
 };
