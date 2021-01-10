@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { useLayout } from "../lib/layout";
 import HeadingMobile from "./HeadingMobile";
+import Messages from "./Messages";
 
 const Layout: React.FC = ({ children }) => {
   const { title } = useLayout();
@@ -12,6 +13,7 @@ const Layout: React.FC = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HeadingMobile />
+      <Messages />
       <main className="flex flex-col w-full h-full bg-red-50">{children}</main>
     </>
   );

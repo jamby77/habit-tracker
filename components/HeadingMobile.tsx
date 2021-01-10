@@ -1,19 +1,19 @@
-import React from "react";
 import Link from "next/link";
-import Logo from "./Logo";
-import Plus from "../svg/plus";
+import React from "react";
 import { useAuth } from "../lib/auth";
+import Plus from "../svg/plus";
+import Logo from "./Logo";
 
 const HeadingMobile: React.FC = () => {
-  const { user } = useAuth();
+  const { user, signout } = useAuth();
   return (
-    <div className="bg-white shadow-lg flex flex-row justify-between px-4 py-2 items-center sm:px-8 sm:py-4">
+    <div className="HeadingMobile bg-white shadow-lg flex flex-row justify-between px-4 py-2 items-center sm:px-8 sm:py-4">
       <Link href={"/"}>
         <a title="Dashboard">
           <Logo />
         </a>
       </Link>
-      <nav className="flex flex-row gap-10">
+      <nav className="sm:flex flex-row gap-10 hidden ">
         <Link href="/">
           <a>Home</a>
         </Link>
@@ -35,16 +35,18 @@ const HeadingMobile: React.FC = () => {
             <a>Sign In/Up</a>
           </Link>
         ) : (
-          <Link href="/signout">
-            <a>Sign Out</a>
-          </Link>
+          <button onClick={() => signout()}>Sign Out</button>
         )}
       </nav>
-      <button className="active:bg-green-50 focus:outline-white w-12 h-12 flex items-center justify-center flex-grow-0 focus:ring-2 focus:ring-green-200 focus:ring-opacity-50 rounded-full">
-        <span className="w-8 h-8 text-green-600">
-          <Plus className="stroke-current fill-current" />
-        </span>
-      </button>
+      {user && (
+        <Link href={"/habits/add"}>
+          <a className="active:bg-green-50 focus:outline-white w-12 h-12 flex items-center justify-center flex-grow-0 focus:ring-2 focus:ring-green-200 focus:ring-opacity-50 rounded-full">
+            <span className="w-8 h-8 text-green-600">
+              <Plus className="stroke-current fill-current" />
+            </span>
+          </a>
+        </Link>
+      )}
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { createHabit, deleteHabit, getUserHabits, updateHabit } from "./db";
+
 export const dateFormat = "yyyy-MM-dd";
 
 export type Habit = {
@@ -9,8 +11,26 @@ export type Habit = {
 
 export type HabitDisplayType = "week" | "month";
 
-export const getHabits = async () => {
-  return habits;
+export const getHabits = async (uid) => {
+  return getUserHabits(uid);
+};
+
+export const addHabit = async (habit) => {
+  return createHabit(habit);
+};
+
+export const editHabit = async (habit) => {
+  if (!habit.id) {
+    return;
+  }
+  return updateHabit(habit.id, habit);
+};
+
+export const removeHabit = async (habit) => {
+  if (!habit.id) {
+    return;
+  }
+  return deleteHabit(habit.id);
 };
 
 const habits: Habit[] = [

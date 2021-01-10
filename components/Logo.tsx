@@ -3,7 +3,7 @@ import Habit from "../svg/habit";
 
 const Logo = () => {
   return (
-    <div className="self-center fill-current text-red-700 h-12 w-12">
+    <div className="Logo self-center fill-current text-red-700 h-12 w-12">
       <Habit />
     </div>
   );
