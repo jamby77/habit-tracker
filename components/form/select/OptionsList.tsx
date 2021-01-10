@@ -2,7 +2,7 @@ import React from "react";
 import Option from "./Option";
 
 export type ComplexOptionType = { value: string | number; label: string };
-export type OptionType = string | number | ComplexOptionType;
+export type OptionType = ComplexOptionType | string | number;
 
 /**
  * Select list, show/hide based on select state.
@@ -40,10 +40,10 @@ const OptionsList = ({
           value = opt?.value;
         }
 
-        let optionValue = value;
+        let optionValue = opt;
         if (OptionRenderer) {
           // @ts-ignore
-          optionValue = <OptionRenderer value={value} />;
+          optionValue = <OptionRenderer value={opt} />;
         }
         return (
           <Option
