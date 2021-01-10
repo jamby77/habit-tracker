@@ -10,6 +10,7 @@ import {
 import { Button, Icon, Input, Label, Textarea } from "../../components/form";
 import Select from "../../components/form/Select";
 import { useUser } from "../../lib/auth";
+import { useTitle } from "../../lib/layout";
 
 export const Occurrence = {
   Daily: "d",
@@ -20,6 +21,7 @@ export const Occurrence = {
 
 const Add = () => {
   const user = useUser();
+  useTitle("Add Habit");
   const [submitting, setSubmitting] = useState(false);
   const [habit, setHabit] = useState({
     uid: "",
@@ -30,6 +32,8 @@ const Add = () => {
 
   const handleSubmit = () => {
     setSubmitting(true);
+    const userHabit = { ...habit, uid: user.uid };
+    console.log(userHabit);
   };
   return (
     <Container>
@@ -44,15 +48,33 @@ const Add = () => {
               <Label htmlFor="habitName">Habit name *</Label>
               <div className="flex">
                 <Icon icon="mdi-debug-step-over" />
-                <Input placeholder="Drink 3l of water" />
+                <Input
+                  placeholder="Drink 3l of water"
+                  id="habitName"
+                  name="habitName"
+                  value={habit.name}
+                  onChange={(event) => {
+                    const name = event.target.value;
+                    setHabit({ ...habit, name });
+                  }}
+                />
               </div>
             </FormGroup>
           </FormRow>
           <FormRow>
             <FormGroup>
-              <Label htmlFor="habitName">Habit description</Label>
+              <Label htmlFor="habitDescription">Habit description</Label>
               <div className="flex">
-                <Textarea placeholder="Drink at least 3l of water during the day" />
+                <Textarea
+                  id="habitDescription"
+                  name="habitDescription"
+                  placeholder="Drink at least 3l of water during the day"
+                  value={habit.description}
+                  onChange={(event) => {
+                    const description = event.target.value;
+                    setHabit({ ...habit, description });
+                  }}
+                />
               </div>
             </FormGroup>
           </FormRow>
@@ -61,10 +83,12 @@ const Add = () => {
               <Label htmlFor="habitName">Habit occurs</Label>
               <div className="flex">
                 <Select
-                  className=""
+                  onChange={(occurrence) => {
+                    setHabit({ ...habit, occurrence });
+                  }}
                   placeholder="Select habit occurrence"
                   name="habitOccurrence"
-                  value={Occurrence.Weekly}
+                  value={habit.occurrence}
                   options={[
                     { value: Occurrence.Daily, label: "Daily" },
                     { value: Occurrence.Weekly, label: "Weekly" },
