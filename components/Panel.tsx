@@ -7,6 +7,7 @@ const Panel: ReactFCWithClassName = ({ children, className, ...rest }) => {
     <div
       {...rest}
       className={cn(
+        "Panel",
         "bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden",
         className
       )}
