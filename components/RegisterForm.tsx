@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLayout } from "../lib/layout";
 import { Button, Icon, Input, Label } from "./form";
 import FormContainer from "./FormContainer";
 import FormGroup from "./FormGroup";
@@ -12,6 +13,7 @@ const RegisterForm = ({
   onRegister: (user) => void;
   submitting: boolean;
 }) => {
+  const { error } = useLayout();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,11 +22,20 @@ const RegisterForm = ({
   const handleSubmit = () => {
     const user = { firstName, lastName, email, password };
     if (!firstName || !lastName || !email || !password) {
-      console.info("Missing required data", user);
+      error("Missing required data. All fields are required");
       return;
     }
     onRegister(user);
   };
+
+  const handleKeydown = (event: KeyboardEvent) => {
+    const { code } = event;
+    console.log(code);
+    if (code === "Enter") {
+      handleSubmit();
+    }
+  };
+
   return (
     <FormContainer className="RegisterForm">
       <div className="text-center mb-10">
@@ -46,6 +57,7 @@ const RegisterForm = ({
                 onChange={(e) => {
                   setFirstName(e.target.value);
                 }}
+                onKeyDown={handleKeydown}
               />
             </div>
           </FormGroup>
@@ -62,6 +74,7 @@ const RegisterForm = ({
                 onChange={(e) => {
                   setLastName(e.target.value);
                 }}
+                onKeyDown={handleKeydown}
               />
             </div>
           </FormGroup>
@@ -80,6 +93,7 @@ const RegisterForm = ({
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
+                onKeyDown={handleKeydown}
               />
             </div>
           </FormGroup>
@@ -98,6 +112,7 @@ const RegisterForm = ({
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
+                onKeyDown={handleKeydown}
               />
             </div>
           </FormGroup>

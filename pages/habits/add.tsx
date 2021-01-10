@@ -49,6 +49,13 @@ const Add = () => {
       setSubmitting(false);
     });
   };
+  const handleKeydown = (event: KeyboardEvent) => {
+    const { code } = event;
+    console.log(code);
+    if (code === "Enter") {
+      handleSubmit();
+    }
+  };
   return (
     <Container>
       <Panel className="mx-4 sm:mx-10">
@@ -71,6 +78,7 @@ const Add = () => {
                     const name = event.target.value;
                     setHabit({ ...habit, name });
                   }}
+                  onKeyDown={handleKeydown}
                 />
               </div>
             </FormGroup>
