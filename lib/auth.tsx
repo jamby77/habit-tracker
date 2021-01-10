@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
-import queryString from "query-string";
-import firebase from "./firebase";
-import { createUser } from "./db";
 import { useRouter } from "next/router";
+import queryString from "query-string";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { createUser } from "./db";
+import firebase from "./firebase";
 import { useLayout } from "./layout";
 
 const authContext = createContext<{
@@ -51,12 +51,16 @@ export const useAuth = () => {
   return useContext(authContext);
 };
 
-export const useUser = () => {
+export const useUser = (redirectTo?: string) => {
   const { user } = useAuth();
   const router = useRouter();
+  const path = router.pathname;
   useEffect(() => {
+    console.table(router);
     if (!user) {
       router.push("/signin");
+    } else {
+      router.push(redirectTo || path);
     }
   }, [user]);
   return user;

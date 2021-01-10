@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from "react";
-import RegisterForm from "../components/RegisterForm";
-import LoginForm from "../components/LoginForm";
-import Button from "../components/form/Button";
-import { useAuth } from "../lib/auth";
-import OutlineButton from "../components/form/OutlineButton";
-import { useRouter } from "next/router";
-import Notification, { NotificationType } from "../components/Notification";
+import React, { useState } from "react";
 import Container from "../components/Container";
+import Button from "../components/form/Button";
+import OutlineButton from "../components/form/OutlineButton";
+import LoginForm from "../components/LoginForm";
+import Notification, { NotificationType } from "../components/Notification";
 import Panel from "../components/Panel";
+import RegisterForm from "../components/RegisterForm";
+import { useAuth } from "../lib/auth";
 
 const LOGIN = false;
 const REGISTER = true;
 
 const Signin = () => {
-  const { signup, signin, user } = useAuth();
-  const router = useRouter();
+  const { signup, signin } = useAuth();
   const [loginOrRegister, setLogin] = useState(LOGIN);
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    if (user) {
-      router.push("/dashboard");
-    }
-  }, [user]);
   return (
     <Container>
       <Panel className="login-panel">

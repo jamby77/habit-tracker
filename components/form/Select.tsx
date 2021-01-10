@@ -58,7 +58,6 @@ const Select = ({
       if (selectRef.current === null) {
         return;
       }
-      console.dir(event);
       const target = event.target;
       const select = selectRef.current;
       const parents = elementParentPath(target);

@@ -11,7 +11,6 @@ const Popover = ({ options, selectedValue, onChange }) => {
         options={options}
         selectedValue={selectedValue}
         onItemSelected={(v) => {
-          console.log(v);
           onChange(v);
         }}
       />
