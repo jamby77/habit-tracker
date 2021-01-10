@@ -7,13 +7,13 @@ import { AuthProvider } from "../lib/auth";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <AuthProvider>
-      <LayoutProvider>
+    <LayoutProvider>
+      <AuthProvider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </LayoutProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </LayoutProvider>
   );
 };
 

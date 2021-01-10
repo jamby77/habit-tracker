@@ -1,7 +1,7 @@
-import React from "react";
-import { Habit } from "../lib/habits";
 import cn from "clsx";
+import React from "react";
 import { useHabits } from "../lib/HabitProvider";
+import { Habit } from "../lib/habits";
 
 const HabitDailyCell = ({
   habit,
@@ -24,7 +24,7 @@ const HabitDailyCell = ({
     "disabled:opacity-50": disabled,
   };
   return (
-    <div>
+    <div className="HabitDailyCell">
       <button
         disabled={disabled}
         key={`${habit.name}-${dateKey}`}

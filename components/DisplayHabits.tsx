@@ -1,17 +1,17 @@
-import React from "react";
-import DaysHeading from "./DaysHeading";
-import HabitDailyRow from "./HabitDailyRow";
 import {
   eachDayOfInterval,
-  endOfWeek,
   endOfMonth,
+  endOfWeek,
   format,
+  startOfMonth,
   startOfToday,
   startOfWeek,
-  startOfMonth,
 } from "date-fns";
-import { HabitDisplayType } from "../lib/habits";
+import React from "react";
 import { useHabits } from "../lib/HabitProvider";
+import { HabitDisplayType } from "../lib/habits";
+import DaysHeading from "./DaysHeading";
+import HabitDailyRow from "./HabitDailyRow";
 
 const DisplayHabits = ({ type }: { type: HabitDisplayType }) => {
   const { habits } = useHabits();
@@ -29,7 +29,7 @@ const DisplayHabits = ({ type }: { type: HabitDisplayType }) => {
     end,
   });
   return (
-    <div className="py-4 px-4 sm:px-8 overflow-hidden h-screen w-screen">
+    <div className="DisplayHabits py-4 px-4 sm:px-8 overflow-hidden h-screen w-screen">
       <h2 className="text-3xl text-center py-4">{`Daily habits (${
         type === "week" ? "weekly" : "monthly"
       })`}</h2>
@@ -48,6 +48,7 @@ const DisplayHabits = ({ type }: { type: HabitDisplayType }) => {
         </div>
         <div className="tracker-body flex flex-col gap-1 w-full">
           {habits.map((habit) => {
+            console.log(habit);
             return <HabitDailyRow key={habit.name} days={days} habit={habit} />;
           })}
         </div>

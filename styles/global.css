@@ -8,7 +8,7 @@ html, body {
     min-height: 100%;
 }
 html {
-    min-width: 360px;
+    min-width: 100vw;
     scroll-behavior: smooth;
 }
 
@@ -29,4 +29,9 @@ button,
 select,
 a {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.login-panel {
+    max-width: 400px;
+    min-height: 630px;
 }
