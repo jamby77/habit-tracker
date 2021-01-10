@@ -18,7 +18,8 @@ function getHabitsCollection() {
 
 export async function getUserHabits(uid) {
   const habits = getHabitsCollection();
-  const query = habits.where("uid", "==", uid).orderBy("createdAt");
+  const query = habits.where("uid", "==", uid);
+  query.orderBy("createdAt");
   const snapshot = await query.get();
   if (snapshot.empty) {
     return [];

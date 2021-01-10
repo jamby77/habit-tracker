@@ -1,22 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useAuth } from "./auth";
 import { getHabits, Habit } from "./habits";
 
 type HabitProviderType = {
-  habits: Habit[];
-  toggleHabit: (habit: Habit, day: string) => void;
+  habits?: Habit[];
+  toggleHabit?: (habit: Habit, day: string) => void;
 };
-const habitsContext = React.createContext<HabitProviderType>({
-  habits: [],
-  toggleHabit: (habit: Habit, day: string) => {},
-});
+const habitsContext = React.createContext<HabitProviderType>({});
 
 const useHabitsProvider = () => {
   const [habits, setHabits] = useState<Habit[]>([]);
+  const { user } = useAuth();
   useEffect(() => {
-    getHabits().then((serverHabits) => {
-      setHabits(serverHabits);
+    if (!user) {
+      return;
+    }
+    getHabits(user.uid).then((serverHabits) => {
+      setHabits(
+        serverHabits.map((sh) => {
+          return { ...sh, id: sh.id, completed: sh.completed, name: sh.name };
+        })
+      );
     });
-  }, []);
+  }, [user]);
 
   const toggleHabit = (habit: Habit, day: string) => {
     // change habit complete state
