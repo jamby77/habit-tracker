@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLayout } from "../lib/layout";
 import { Button, Icon, Input, Label } from "./form";
 import FormContainer from "./FormContainer";
 import FormGroup from "./FormGroup";
@@ -12,15 +13,24 @@ const LoginForm = ({
   onLogin: (user) => void;
   submitting: boolean;
 }) => {
+  const { error } = useLayout();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSubmit = () => {
     const user = { email, password };
     if (!email || !password) {
-      console.info("Missing required data", user);
+      error("Missing required data. Email and password are required");
       return;
     }
     onLogin(user);
+  };
+
+  const handleKeydown = (event: KeyboardEvent) => {
+    const { code } = event;
+    console.log(code);
+    if (code === "Enter") {
+      handleSubmit();
+    }
   };
   return (
     <FormContainer className="LoginForm">
@@ -43,6 +53,7 @@ const LoginForm = ({
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
+                onKeyDown={handleKeydown}
               />
             </div>
           </FormGroup>
@@ -61,6 +72,7 @@ const LoginForm = ({
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
+                onKeyDown={handleKeydown}
               />
             </div>
           </FormGroup>

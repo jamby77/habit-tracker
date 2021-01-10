@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Container from "../components/Container";
 import Button from "../components/form/Button";
@@ -13,6 +14,7 @@ const REGISTER = true;
 
 const Signin = () => {
   const { signup, signin } = useAuth();
+  const router = useRouter();
   const [loginOrRegister, setLogin] = useState(LOGIN);
   const [submitting, setSubmitting] = useState(false);
 
@@ -67,6 +69,8 @@ const Signin = () => {
                 signup(user).then((result) => {
                   if (!result) {
                     setSubmitting(false);
+                  } else {
+                    router.push("/dashboard");
                   }
                 });
               }}
@@ -80,6 +84,8 @@ const Signin = () => {
                 signin(user).then((result) => {
                   if (!result) {
                     setSubmitting(false);
+                  } else {
+                    router.push("/dashboard");
                   }
                 });
               }}
