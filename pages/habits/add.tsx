@@ -9,9 +9,25 @@ import {
 } from "../../components";
 import { Button, Icon, Input, Label, Textarea } from "../../components/form";
 import Select from "../../components/form/Select";
+import { useUser } from "../../lib/auth";
+
+export const Occurrence = {
+  Daily: "d",
+  Weekly: "w",
+  Monthly: "m",
+  Yearly: "y",
+};
 
 const Add = () => {
+  const user = useUser();
   const [submitting, setSubmitting] = useState(false);
+  const [habit, setHabit] = useState({
+    uid: "",
+    name: "",
+    description: "",
+    occurrence: Occurrence.Daily,
+  });
+
   const handleSubmit = () => {
     setSubmitting(true);
   };
@@ -48,8 +64,13 @@ const Add = () => {
                   className=""
                   placeholder="Select habit occurrence"
                   name="habitOccurrence"
-                  value={"Daily"}
-                  options={["Daily", "Weekly", "Monthly", "Yearly"]}
+                  value={Occurrence.Weekly}
+                  options={[
+                    { value: Occurrence.Daily, label: "Daily" },
+                    { value: Occurrence.Weekly, label: "Weekly" },
+                    { value: Occurrence.Monthly, label: "Monthly" },
+                    { value: Occurrence.Yearly, label: "Yearly" },
+                  ]}
                 />
               </div>
             </FormGroup>

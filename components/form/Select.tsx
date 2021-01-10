@@ -76,6 +76,7 @@ const Select = ({
       <div className="mt-1 relative">
         <SelectedItem
           toggleOpen={toggleOpen}
+          options={options}
           value={selectedValue || placeholder}
         />
         {open && (
