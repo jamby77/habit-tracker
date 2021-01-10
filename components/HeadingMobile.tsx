@@ -1,13 +1,13 @@
-import React from "react";
 import Link from "next/link";
-import Logo from "./Logo";
-import Plus from "../svg/plus";
+import React from "react";
 import { useAuth } from "../lib/auth";
+import Plus from "../svg/plus";
+import Logo from "./Logo";
 
 const HeadingMobile: React.FC = () => {
   const { user, signout } = useAuth();
   return (
-    <div className="bg-white shadow-lg flex flex-row justify-between px-4 py-2 items-center sm:px-8 sm:py-4">
+    <div className="HeadingMobile bg-white shadow-lg flex flex-row justify-between px-4 py-2 items-center sm:px-8 sm:py-4">
       <Link href={"/"}>
         <a title="Dashboard">
           <Logo />

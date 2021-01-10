@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Heading1 from "./Heading1";
-import FormContainer from "./FormContainer";
-import FormRow from "./FormRow";
-import FormGroup from "./FormGroup";
 import { Button, Icon, Input, Label } from "./form";
+import FormContainer from "./FormContainer";
+import FormGroup from "./FormGroup";
+import FormRow from "./FormRow";
+import Heading1 from "./Heading1";
 
 const RegisterForm = ({
   onRegister,
@@ -26,7 +26,7 @@ const RegisterForm = ({
     onRegister(user);
   };
   return (
-    <FormContainer>
+    <FormContainer className="RegisterForm">
       <div className="text-center mb-10">
         <Heading1>Register</Heading1>
         <p>Enter your information to register</p>

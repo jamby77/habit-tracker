@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Heading1 from "./Heading1";
-import FormContainer from "./FormContainer";
-import FormRow from "./FormRow";
-import FormGroup from "./FormGroup";
 import { Button, Icon, Input, Label } from "./form";
+import FormContainer from "./FormContainer";
+import FormGroup from "./FormGroup";
+import FormRow from "./FormRow";
+import Heading1 from "./Heading1";
 
 const LoginForm = ({
   onLogin,
@@ -23,7 +23,7 @@ const LoginForm = ({
     onLogin(user);
   };
   return (
-    <FormContainer>
+    <FormContainer className="LoginForm">
       <div className="text-center mb-10">
         <Heading1>Log In</Heading1>
         <p>Welcome Back!</p>
