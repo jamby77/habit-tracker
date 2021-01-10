@@ -19,15 +19,11 @@ export const renderValue = (value, options: OptionType[]) => {
       return opt === value || opt === value.value;
     });
 
+    // @ts-ignore-
+    const display = displayValue.label || displayValue || value;
     return (
       <span className="flex items-center w-full">
-        <span className="ml-3 block truncate">
-          {displayValue.label ||
-            displayValue ||
-            value.label ||
-            value.value ||
-            value}
-        </span>
+        <span className="ml-3 block truncate">{display}</span>
       </span>
     );
   }
