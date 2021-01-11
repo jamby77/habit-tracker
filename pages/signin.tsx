@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../components/Container";
 import Button from "../components/form/Button";
 import OutlineButton from "../components/form/OutlineButton";
@@ -13,11 +13,15 @@ const LOGIN = false;
 const REGISTER = true;
 
 const Signin = () => {
-  const { signup, signin } = useAuth();
+  const { signup, signin, user } = useAuth();
   const router = useRouter();
   const [loginOrRegister, setLogin] = useState(LOGIN);
   const [submitting, setSubmitting] = useState(false);
-
+  useEffect(() => {
+    if (user) {
+      router.replace("/dashboard");
+    }
+  }, []);
   return (
     <Container>
       <Panel className="login-panel">
