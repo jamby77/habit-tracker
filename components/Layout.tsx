@@ -31,6 +31,15 @@ const Layout: React.FC = ({ children }) => {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
+        <meta property="og:title" content="Track your habits" />
+        <meta
+          property="og:description"
+          content="Get a control over your existing habits or track new ones!"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:image" content="/android-chrome-512x512.png" />
+        <meta property="og:url" content="https://habits.jamby77.dev/" />
       </Head>
       <HeadingMobile />
       <Messages />
