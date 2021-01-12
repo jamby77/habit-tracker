@@ -1,4 +1,10 @@
-import { createHabit, deleteHabit, getUserHabits, updateHabit } from "./db";
+import {
+  createHabit,
+  deleteHabit,
+  getHabitBySlug,
+  getUserHabits,
+  updateHabit,
+} from "./db";
 
 export const dateFormat = "yyyy-MM-dd";
 
@@ -30,6 +36,13 @@ export const editHabit = async (habit) => {
     return;
   }
   return updateHabit(habit.id, habit);
+};
+
+export const findHabit = async (slug: string) => {
+  if (!slug) {
+    return;
+  }
+  return getHabitBySlug(slug);
 };
 
 export const removeHabit = async (habit) => {

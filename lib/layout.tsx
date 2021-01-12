@@ -18,7 +18,7 @@ type NotificationMessage = {
 };
 
 export function useProvideLayout() {
-  const initialTitle = "HabitType Tracker";
+  const initialTitle = "Habit Tracker";
   const [title, setTitle] = useState(initialTitle);
   const [messages, setMessages] = useState<NotificationMessage[]>([]);
 
