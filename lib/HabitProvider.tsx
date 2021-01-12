@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "./auth";
-import { getHabits, HabitType } from "./habits";
+import { editHabit, getHabits, HabitType } from "./habits";
 
 type HabitProviderType = {
   habits?: HabitType[];
@@ -11,18 +11,12 @@ const habitsContext = React.createContext<HabitProviderType>({});
 const useHabitsProvider = () => {
   const [habits, setHabits] = useState<HabitType[]>([]);
   const { user } = useAuth();
-  console.log(user);
   useEffect(() => {
-    console.log(user);
     if (!user) {
       return;
     }
     getHabits(user.uid).then((serverHabits) => {
-      setHabits(
-        serverHabits.map((sh) => {
-          return { ...sh, id: sh.id, completed: sh.completed, name: sh.name };
-        })
-      );
+      setHabits(serverHabits);
     });
   }, [user]);
 
@@ -35,13 +29,15 @@ const useHabitsProvider = () => {
       ...habit,
       completed: { ...habit.completed, [day]: !completed },
     };
-    const updatedHabits = habits.map((h) => {
-      if (h === habit) {
-        return updatedHabit;
-      }
-      return h;
+    editHabit(updatedHabit).then(() => {
+      const updatedHabits = habits.map((h) => {
+        if (h === habit) {
+          return updatedHabit;
+        }
+        return h;
+      });
+      setHabits(updatedHabits);
     });
-    setHabits(updatedHabits);
   };
 
   return {
@@ -51,9 +47,7 @@ const useHabitsProvider = () => {
 };
 
 export const useHabits = () => {
-  const context = useContext(habitsContext);
-  console.log(context);
-  return context;
+  return useContext(habitsContext);
 };
 
 export const HabitProvider: React.FC = ({ children }) => {

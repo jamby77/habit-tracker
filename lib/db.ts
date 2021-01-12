@@ -24,7 +24,12 @@ export async function getUserHabits(uid) {
   if (snapshot.empty) {
     return [];
   }
-  return snapshot.docs.map((doc) => doc.data());
+  return snapshot.docs.map((doc) => {
+    const data = doc.data();
+    const id = doc.id;
+    const { name, completed, slug } = data;
+    return { ...data, name, completed, slug, id };
+  });
 }
 
 export async function getHabitById(id) {
