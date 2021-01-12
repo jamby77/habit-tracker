@@ -3,6 +3,8 @@ import { createHabit, deleteHabit, getUserHabits, updateHabit } from "./db";
 export const dateFormat = "yyyy-MM-dd";
 
 export type HabitType = {
+  id?: string;
+  slug: string;
   name: string;
   completed: {
     [date: string]: boolean;
