@@ -5,19 +5,24 @@ import { editHabit, getHabits, HabitType } from "./habits";
 type HabitProviderType = {
   habits?: HabitType[];
   toggleHabit?: (habit: HabitType, day: string) => void;
+  refreshHabits?: (userId: string) => void;
 };
 const habitsContext = React.createContext<HabitProviderType>({});
 
 const useHabitsProvider = () => {
   const [habits, setHabits] = useState<HabitType[]>([]);
   const { user } = useAuth();
+  const refreshHabits = (uid) => {
+    getHabits(uid).then((serverHabits) => {
+      setHabits(serverHabits);
+    });
+  };
+
   useEffect(() => {
     if (!user) {
       return;
     }
-    getHabits(user.uid).then((serverHabits) => {
-      setHabits(serverHabits);
-    });
+    refreshHabits(user.uid);
   }, [user]);
 
   const toggleHabit = (habit: HabitType, day: string) => {
@@ -43,6 +48,7 @@ const useHabitsProvider = () => {
   return {
     habits,
     toggleHabit,
+    refreshHabits,
   };
 };
 

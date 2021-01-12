@@ -19,6 +19,9 @@ export const getHabits = async (uid) => {
 };
 
 export const addHabit = async (habit) => {
+  if (!habit.uid) {
+    return;
+  }
   return createHabit(habit);
 };
 
