@@ -11,7 +11,9 @@ const habitsContext = React.createContext<HabitProviderType>({});
 const useHabitsProvider = () => {
   const [habits, setHabits] = useState<Habit[]>([]);
   const { user } = useAuth();
+  console.log(user);
   useEffect(() => {
+    console.log(user);
     if (!user) {
       return;
     }
@@ -49,7 +51,9 @@ const useHabitsProvider = () => {
 };
 
 export const useHabits = () => {
-  return useContext(habitsContext);
+  const context = useContext(habitsContext);
+  console.log(context);
+  return context;
 };
 
 export const HabitProvider: React.FC = ({ children }) => {
