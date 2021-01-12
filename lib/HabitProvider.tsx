@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "./auth";
-import { getHabits, Habit } from "./habits";
+import { getHabits, HabitType } from "./habits";
 
 type HabitProviderType = {
-  habits?: Habit[];
-  toggleHabit?: (habit: Habit, day: string) => void;
+  habits?: HabitType[];
+  toggleHabit?: (habit: HabitType, day: string) => void;
 };
 const habitsContext = React.createContext<HabitProviderType>({});
 
 const useHabitsProvider = () => {
-  const [habits, setHabits] = useState<Habit[]>([]);
+  const [habits, setHabits] = useState<HabitType[]>([]);
   const { user } = useAuth();
   console.log(user);
   useEffect(() => {
@@ -26,12 +26,12 @@ const useHabitsProvider = () => {
     });
   }, [user]);
 
-  const toggleHabit = (habit: Habit, day: string) => {
+  const toggleHabit = (habit: HabitType, day: string) => {
     // change habit complete state
     // every invocation rotate complete state
     // undefined -> true -> false -> true -> false...
     const completed = habit.completed[day] || false;
-    const updatedHabit: Habit = {
+    const updatedHabit: HabitType = {
       ...habit,
       completed: { ...habit.completed, [day]: !completed },
     };
