@@ -19,7 +19,7 @@ const HabitDailyRow: React.FC<{
     >
       <div
         className="w-1/2 sm:w-40 h-8 flex-shrink-0 truncate static pr-4"
-        title={habit.name}
+        title={`${habit.name} - ${habit.description}`}
       >
         {habit.name}
       </div>
