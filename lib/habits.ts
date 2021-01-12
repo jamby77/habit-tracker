@@ -6,6 +6,7 @@ export type HabitType = {
   id?: string;
   slug: string;
   name: string;
+  description?: string;
   completed: {
     [date: string]: boolean;
   };
