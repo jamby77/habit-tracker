@@ -32,7 +32,7 @@ const HabitDailyCell = ({
     "disabled:opacity-50 disabled:cursor-not-allowed border-none ": disabled,
   };
   return (
-    <div className="HabitDailyCell ">
+    <div className="HabitDailyCell" title={dateKey}>
       <button
         disabled={disabled}
         key={`${habit.name}-${dateKey}`}

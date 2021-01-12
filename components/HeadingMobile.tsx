@@ -3,9 +3,17 @@ import React from "react";
 import { useAuth } from "../lib/auth";
 import Plus from "../svg/plus";
 import Logo from "./Logo";
+import ProfileTop from "./ProfileTop";
+import SmallDevicesNav from "./SmallDevicesNav";
+
+const menu = [
+  { label: "Dashboard", path: "/dashboard" },
+  { label: "Weekly", path: "/weekly" },
+  { label: "Monthly", path: "/monthly" },
+];
 
 const HeadingMobile: React.FC = () => {
-  const { user, signout } = useAuth();
+  const { user } = useAuth();
   return (
     <div className="HeadingMobile bg-white shadow-lg flex flex-row justify-between px-4 py-2 items-center sm:px-8 sm:py-4">
       <Link href={"/"}>
@@ -13,29 +21,25 @@ const HeadingMobile: React.FC = () => {
           <Logo />
         </a>
       </Link>
-      <nav className="sm:flex flex-row gap-10 hidden ">
+      <div className="sm:hidden">
+        <SmallDevicesNav menuItems={menu} />
+      </div>
+      <nav className="sm:flex flex-row gap-10 hidden items-center">
         <Link href="/">
           <a>Home</a>
         </Link>
-        {user && (
-          <>
-            <Link href="/dashboard">
-              <a>Dashboard</a>
-            </Link>{" "}
-            <Link href="/weekly">
-              <a>Weekly</a>
-            </Link>{" "}
-            <Link href="/monthly">
-              <a>Monthly</a>
+        {user &&
+          menu.map((item) => (
+            <Link key={item.path} href={item.path}>
+              <a>{item.label}</a>
             </Link>
-          </>
-        )}
+          ))}
         {!user ? (
           <Link href="/signin">
             <a>Sign In/Up</a>
           </Link>
         ) : (
-          <button onClick={() => signout()}>Sign Out</button>
+          <ProfileTop />
         )}
       </nav>
       {user && (
