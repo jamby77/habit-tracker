@@ -12,6 +12,7 @@ import {
 import { Button, Icon, Input, Label, Textarea } from "../../components/form";
 import Select from "../../components/form/Select";
 import { useUser } from "../../lib/auth";
+import { useHabits } from "../../lib/HabitProvider";
 import { addHabit } from "../../lib/habits";
 import { useLayout, useTitle } from "../../lib/layout";
 
@@ -32,6 +33,7 @@ const baseHabit = {
 const Add = () => {
   const user = useUser();
   const { success } = useLayout();
+  const { refreshHabits } = useHabits();
   useTitle("Add HabitType");
   const [submitting, setSubmitting] = useState(false);
 
@@ -47,6 +49,7 @@ const Add = () => {
       success(`${result.name} added! Do you want to add another one?`);
       setHabit({ ...baseHabit });
       setSubmitting(false);
+      refreshHabits(user.uid);
     });
   };
   const handleKeydown = (event: KeyboardEvent) => {
