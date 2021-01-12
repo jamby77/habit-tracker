@@ -1,45 +1,43 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "./auth";
-import { getHabits, Habit } from "./habits";
+import { editHabit, getHabits, HabitType } from "./habits";
 
 type HabitProviderType = {
-  habits?: Habit[];
-  toggleHabit?: (habit: Habit, day: string) => void;
+  habits?: HabitType[];
+  toggleHabit?: (habit: HabitType, day: string) => void;
 };
 const habitsContext = React.createContext<HabitProviderType>({});
 
 const useHabitsProvider = () => {
-  const [habits, setHabits] = useState<Habit[]>([]);
+  const [habits, setHabits] = useState<HabitType[]>([]);
   const { user } = useAuth();
   useEffect(() => {
     if (!user) {
       return;
     }
     getHabits(user.uid).then((serverHabits) => {
-      setHabits(
-        serverHabits.map((sh) => {
-          return { ...sh, id: sh.id, completed: sh.completed, name: sh.name };
-        })
-      );
+      setHabits(serverHabits);
     });
   }, [user]);
 
-  const toggleHabit = (habit: Habit, day: string) => {
+  const toggleHabit = (habit: HabitType, day: string) => {
     // change habit complete state
     // every invocation rotate complete state
     // undefined -> true -> false -> true -> false...
     const completed = habit.completed[day] || false;
-    const updatedHabit: Habit = {
+    const updatedHabit: HabitType = {
       ...habit,
       completed: { ...habit.completed, [day]: !completed },
     };
-    const updatedHabits = habits.map((h) => {
-      if (h === habit) {
-        return updatedHabit;
-      }
-      return h;
+    editHabit(updatedHabit).then(() => {
+      const updatedHabits = habits.map((h) => {
+        if (h === habit) {
+          return updatedHabit;
+        }
+        return h;
+      });
+      setHabits(updatedHabits);
     });
-    setHabits(updatedHabits);
   };
 
   return {
