@@ -56,6 +56,9 @@ const Add = () => {
       handleSubmit();
     }
   };
+  if (!user) {
+    return null;
+  }
   return (
     <Container>
       <Panel className="mx-4 sm:mx-10">
