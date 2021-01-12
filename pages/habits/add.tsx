@@ -32,7 +32,7 @@ const baseHabit = {
 const Add = () => {
   const user = useUser();
   const { success } = useLayout();
-  useTitle("Add Habit");
+  useTitle("Add HabitType");
   const [submitting, setSubmitting] = useState(false);
 
   const [habit, setHabit] = useState(baseHabit);
@@ -56,6 +56,9 @@ const Add = () => {
       handleSubmit();
     }
   };
+  if (!user) {
+    return null;
+  }
   return (
     <Container>
       <Panel className="mx-4 sm:mx-10">
@@ -68,7 +71,10 @@ const Add = () => {
             <FormGroup>
               <Label htmlFor="habitName">Habit name *</Label>
               <div className="flex">
-                <Icon icon="mdi-debug-step-over" />
+                <Icon
+                  icon="mdi-debug-step-over"
+                  className="w-10 z-10 pl-1 text-center text-purple-500"
+                />
                 <Input
                   placeholder="Drink 3l of water"
                   id="habitName"

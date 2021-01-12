@@ -56,7 +56,7 @@ export const useUser = (redirectTo?: string) => {
   const router = useRouter();
   const path = router.pathname;
   useEffect(() => {
-    if (!user) {
+    if (!user && user !== undefined) {
       router.push("/signin");
     } else {
       router.push(redirectTo || path);
@@ -82,7 +82,7 @@ const formatUser = (user: User) => {
 };
 
 function useProvideAuth() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(undefined);
   const { error } = useLayout();
 
   const handleUser = (rawUser: User | false | null, create = false) => {

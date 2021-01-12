@@ -43,7 +43,10 @@ const LoginForm = ({
           <FormGroup>
             <Label htmlFor="email">Email</Label>
             <div className="flex">
-              <Icon icon="mdi-email-outline" />
+              <Icon
+                icon="mdi-email-outline"
+                className="w-10 z-10 pl-1 text-center text-purple-500"
+              />
               <Input
                 type="email"
                 id="email"
@@ -62,7 +65,10 @@ const LoginForm = ({
           <FormGroup className="mb-12">
             <Label htmlFor="password">Password</Label>
             <div className="flex">
-              <Icon icon="mdi-lock-outline" />
+              <Icon
+                icon="mdi-lock-outline"
+                className="w-10 z-10 pl-1 text-center text-purple-500"
+              />
               <Input
                 type="password"
                 id="password"

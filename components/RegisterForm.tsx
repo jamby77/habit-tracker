@@ -30,7 +30,6 @@ const RegisterForm = ({
 
   const handleKeydown = (event: KeyboardEvent) => {
     const { code } = event;
-    console.log(code);
     if (code === "Enter") {
       handleSubmit();
     }
@@ -47,7 +46,10 @@ const RegisterForm = ({
           <FormGroup full={false} className="w-1/2">
             <Label htmlFor="first-name">First name</Label>
             <div className="flex">
-              <Icon icon={"mdi-account-outline"} />
+              <Icon
+                icon={"mdi-account-outline"}
+                className="w-10 z-10 pl-1 text-center text-purple-500"
+              />
               <Input
                 id="first-name"
                 name="first-name"
@@ -64,7 +66,10 @@ const RegisterForm = ({
           <FormGroup full={false} className="w-1/2">
             <Label htmlFor="last-name">Last name</Label>
             <div className="flex">
-              <Icon icon={"mdi-account-outline"} />
+              <Icon
+                icon={"mdi-account-outline"}
+                className="w-10 z-10 pl-1 text-center text-purple-500"
+              />
               <Input
                 type="text"
                 id="last-name"
@@ -83,7 +88,10 @@ const RegisterForm = ({
           <FormGroup>
             <Label htmlFor="email">Email</Label>
             <div className="flex">
-              <Icon icon={"mdi-email-outline"} />
+              <Icon
+                icon={"mdi-email-outline"}
+                className="w-10 z-10 pl-1 text-center text-purple-500"
+              />
               <Input
                 type="email"
                 id="email"
@@ -102,7 +110,10 @@ const RegisterForm = ({
           <FormGroup className="mb-12">
             <Label htmlFor="password">Password</Label>
             <div className="flex">
-              <Icon icon={"mdi-lock-outline"} />
+              <Icon
+                icon={"mdi-lock-outline"}
+                className="w-10 z-10 pl-1 text-center text-purple-500"
+              />
               <Input
                 type="password"
                 id="password"
