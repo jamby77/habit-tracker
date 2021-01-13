@@ -21,7 +21,7 @@ export const View = ({ habit }: { habit: HabitType }) => {
 
   return (
     <Container>
-      <Panel className="mx-4 sm:mx-10">
+      <Panel className="mx-4 sm:mx-10 max-w-3xl">
         <header className="text-center px-4 py-4">
           <Heading1>{habit.name}</Heading1>
           <p className="">{habit.description}</p>
@@ -35,7 +35,7 @@ export const View = ({ habit }: { habit: HabitType }) => {
             You should try to execute this habit every{" "}
             {follow[habit.occurrence]}
           </p>
-          <div className="flex flex-col gap-4 my-4">
+          <div className="flex flex-col gap-2 my-4 h-full overflow-auto">
             {/* render current month, there will be potentially weekly view, daily view with option for notes,
            navigation arrows to browse to previous/next period*/}
             {days.map((day) => {
