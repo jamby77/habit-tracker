@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLayout } from "../lib/layout";
-import { Button, Icon, Input, Label } from "./form";
+import { Icon, Input, Label, SuccessButton } from "./form";
 import FormContainer from "./FormContainer";
 import FormGroup from "./FormGroup";
 import FormRow from "./FormRow";
@@ -85,9 +85,9 @@ const LoginForm = ({
         </FormRow>
         <FormRow>
           <FormGroup>
-            <Button onClick={handleSubmit} disabled={submitting}>
+            <SuccessButton onClick={handleSubmit} disabled={submitting}>
               Log In
-            </Button>
+            </SuccessButton>
           </FormGroup>
         </FormRow>
       </div>

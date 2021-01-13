@@ -6,7 +6,6 @@ const Icon = ({ icon, className = "", color = "" }) => {
     "pointer-events-none flex items-center justify-center",
     className
   );
-  console.log(className, iconClass);
   return (
     <div className={iconClass}>
       <i className={`mdi ${icon} ${color}`} />

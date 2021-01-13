@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { useAuth } from "../lib/auth";
 import Plus from "../svg/plus";
-import Logo from "./Logo";
+import { Logo } from "./index";
 import ProfileTop from "./ProfileTop";
 import SmallDevicesNav from "./SmallDevicesNav";
 
