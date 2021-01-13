@@ -1,15 +1,15 @@
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import slugify from "slug";
 import HabitForm from "../../components/HabitForm";
-import { useUser } from "../../lib/auth";
+import { useAuth } from "../../lib/auth";
 import { useHabits } from "../../lib/HabitProvider";
 import { editHabit, findHabit, HabitType } from "../../lib/habits";
 import { useLayout, useTitle } from "../../lib/layout";
 
 const EditHabit = () => {
-  const user = useUser();
+  const { user } = useAuth();
   const [habit, setHabit] = useState<HabitType>(null);
   useTitle("Edit Habit");
   const router = useRouter();
@@ -18,12 +18,15 @@ const EditHabit = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const { slug } = router.query;
-  findHabit(slug as string).then((habit) => {
-    if (!habit) {
-      return;
-    }
-    setHabit(habit as HabitType);
-  });
+  useEffect(() => {
+    findHabit(slug as string).then((serverHabit) => {
+      console.log({ serverHabit });
+      if (!serverHabit) {
+        return;
+      }
+      setHabit(serverHabit as HabitType);
+    });
+  }, [slug]);
 
   const handleSubmit = (habitUpdate) => {
     setSubmitting(true);
@@ -39,7 +42,8 @@ const EditHabit = () => {
     });
   };
 
-  if (!user) {
+  if (!user || !habit) {
+    console.log({ user, habit });
     return null;
   }
   return (

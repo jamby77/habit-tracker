@@ -25,7 +25,9 @@ const HabitForm = ({ initialHabit, handleSubmit, submitting }) => {
       <Panel className="mx-4 sm:mx-10">
         <FormContainer>
           <div className="text-center mb-10">
-            <Heading1 className="text-center">Add habit</Heading1>
+            <Heading1 className="text-center">
+              {habit.uid ? `Edit "${habit.name}"` : "Add habit"}
+            </Heading1>
             <p>Enter habit details and save it</p>
           </div>
           <FormRow>
