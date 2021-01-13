@@ -1,14 +1,14 @@
 import { format, isAfter, startOfToday } from "date-fns";
 import Link from "next/link";
 import React, { useState } from "react";
-import { dateFormat, HabitType } from "../lib/habits";
-import HabitDailyCell from "./HabitDailyCell";
+import { dateFormat, HabitType } from "../../lib/habits";
+import { DailyCell } from "../index";
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-const HabitDailyRow: React.FC<{
+const DailyRow: React.FC<{
   habit: HabitType;
   days: Date[];
 }> = ({ habit, days }) => {
@@ -33,7 +33,7 @@ const HabitDailyRow: React.FC<{
           const key = format(day, dateFormat);
           const disabled = isAfter(day, startOfToday());
           return (
-            <HabitDailyCell
+            <DailyCell
               habit={habit}
               dateKey={key}
               disabled={disabled}
@@ -46,4 +46,4 @@ const HabitDailyRow: React.FC<{
   );
 };
 
-export default HabitDailyRow;
+export default DailyRow;

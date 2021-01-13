@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import React, { useState } from "react";
 import slug from "slug";
-import HabitForm from "../../components/HabitForm";
+import Form from "../../components/habits/Form";
 import { useUser } from "../../lib/auth";
 import { useHabits } from "../../lib/HabitProvider";
 import { addHabit } from "../../lib/habits";
@@ -46,7 +46,7 @@ const Add = () => {
     return null;
   }
   return (
-    <HabitForm
+    <Form
       initialHabit={habit}
       handleSubmit={handleSubmit}
       submitting={submitting}

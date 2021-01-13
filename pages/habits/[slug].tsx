@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { HabitView } from "../../components/HabitView";
+import { View } from "../../components/habits/View";
 import { useAuth } from "../../lib/auth";
 import { useHabit } from "../../lib/habits";
 
@@ -15,7 +15,7 @@ const ViewHabit = () => {
     console.log({ user, habit });
     return null;
   }
-  return <HabitView habit={habit} />;
+  return <View habit={habit} />;
 };
 
 export default ViewHabit;
