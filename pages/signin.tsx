@@ -1,11 +1,8 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Container from "../components/Container";
+import { Container, LoginForm, Panel, RegisterForm } from "../components";
+import { Info } from "../components/alerts";
 import { PrimaryButton, SecondaryButton } from "../components/form";
-import LoginForm from "../components/LoginForm";
-import Notification, { NotificationType } from "../components/Notification";
-import Panel from "../components/Panel";
-import RegisterForm from "../components/RegisterForm";
 import { useAuth } from "../lib/auth";
 
 const LOGIN = false;
@@ -57,10 +54,7 @@ const Signin = () => {
         </div>
         {submitting && (
           <div className="flex flex-row w-full pt-10 px-5 md:px-10">
-            <Notification
-              message="Your info is on the way"
-              type={NotificationType.Info}
-            />
+            <Info message="Your info is on the way" />
           </div>
         )}
         <div className="md:flex w-full">

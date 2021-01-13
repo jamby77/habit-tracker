@@ -8,12 +8,11 @@ import {
   startOfWeek,
 } from "date-fns";
 import React from "react";
-import { useHabits } from "../lib/HabitProvider";
-import { HabitDisplayType } from "../lib/habits";
-import DaysHeading from "./DaysHeading";
-import HabitDailyRow from "./HabitDailyRow";
+import { useHabits } from "../../lib/HabitProvider";
+import { HabitDisplayType } from "../../lib/habits";
+import { DailyRow, DaysHeading } from "../index";
 
-const DisplayHabits = ({ type }: { type: HabitDisplayType }) => {
+const Display = ({ type }: { type: HabitDisplayType }) => {
   const { habits } = useHabits();
   const today = startOfToday();
   const month = format(today, "MMMM");
@@ -48,7 +47,7 @@ const DisplayHabits = ({ type }: { type: HabitDisplayType }) => {
         </div>
         <div className="tracker-body flex flex-col gap-1 w-full">
           {habits.map((habit) => {
-            return <HabitDailyRow key={habit.name} days={days} habit={habit} />;
+            return <DailyRow key={habit.name} days={days} habit={habit} />;
           })}
         </div>
       </div>
@@ -56,4 +55,4 @@ const DisplayHabits = ({ type }: { type: HabitDisplayType }) => {
   );
 };
 
-export default DisplayHabits;
+export default Display;

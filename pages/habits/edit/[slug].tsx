@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import slugify from "slug";
-import HabitForm from "../../../components/HabitForm";
+import Form from "../../../components/habits/Form";
 import { useAuth } from "../../../lib/auth";
 import { useHabits } from "../../../lib/HabitProvider";
 import { editHabit, findHabit, HabitType } from "../../../lib/habits";
@@ -47,7 +47,7 @@ const EditHabit = () => {
     return null;
   }
   return (
-    <HabitForm
+    <Form
       initialHabit={habit}
       handleSubmit={handleSubmit}
       submitting={submitting}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Occurrence } from "../pages/habits/add";
-import { Icon, Input, Label, SuccessButton, Textarea } from "./form";
-import Select from "./form/Select";
+import { Occurrence } from "../../pages/habits/add";
+import { Icon, Input, Label, SuccessButton, Textarea } from "../form";
+import Select from "../form/Select";
 import {
   Container,
   FormContainer,
@@ -9,9 +9,9 @@ import {
   FormRow,
   Heading1,
   Panel,
-} from "./index";
+} from "../index";
 
-const HabitForm = ({ initialHabit, handleSubmit, submitting }) => {
+const Form = ({ initialHabit, handleSubmit, submitting }) => {
   const [habit, setHabit] = useState(initialHabit);
   const handleKeydown = (event: KeyboardEvent) => {
     const { code } = event;
@@ -106,4 +106,4 @@ const HabitForm = ({ initialHabit, handleSubmit, submitting }) => {
   );
 };
 
-export default HabitForm;
+export default Form;

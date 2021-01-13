@@ -1,6 +1,6 @@
 import React from "react";
 import { useLayout } from "../lib/layout";
-import Notification from "./Notification";
+import { Notification } from "./index";
 
 const Messages = () => {
   const { removeMessage, messages } = useLayout();
