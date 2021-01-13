@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   createHabit,
   deleteHabit,
@@ -22,6 +23,20 @@ export type HabitDisplayType = "week" | "month";
 
 export const getHabits = async (uid) => {
   return getUserHabits(uid);
+};
+
+export const useHabit = (habitSlug: string) => {
+  const [habit, setHabit] = useState<HabitType>(null);
+  useEffect(() => {
+    findHabit(habitSlug).then((serverHabit) => {
+      console.log({ serverHabit });
+      if (!serverHabit) {
+        return;
+      }
+      setHabit(serverHabit as HabitType);
+    });
+  }, [habitSlug]);
+  return habit;
 };
 
 export const addHabit = async (habit) => {
