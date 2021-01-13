@@ -1,5 +1,5 @@
 import React from "react";
-import DisplayHabits from "../components/DisplayHabits";
+import { DisplayHabits } from "../components";
 import { useUser } from "../lib/auth";
 import { useTitle } from "../lib/layout";
 

@@ -1,4 +1,6 @@
+import { DocumentData } from "@firebase/firestore-types";
 import firebase from "./firebase";
+import { HabitType } from "./habits";
 
 const db = firebase.firestore();
 
@@ -15,6 +17,19 @@ export function createUser(uid, data) {
 function getHabitsCollection() {
   return db.collection(COLLECTION_HABITS);
 }
+const transformFirebaseHabit = (habitDoc: DocumentData): HabitType => {
+  const data = habitDoc.data();
+  const id = habitDoc.id;
+  const { name, completed, slug, createdAt, updatedAt } = data;
+  const result = { ...data, name, completed, slug, id };
+  if (createdAt && typeof createdAt.toDate === "function") {
+    result.createdAt = createdAt.toDate();
+  }
+  if (updatedAt && typeof updatedAt.toDate === "function") {
+    result.updatedAt = updatedAt.toDate();
+  }
+  return result;
+};
 
 export async function getUserHabits(uid) {
   const habits = getHabitsCollection();
@@ -25,17 +40,14 @@ export async function getUserHabits(uid) {
     return [];
   }
   return snapshot.docs.map((doc) => {
-    const data = doc.data();
-    const id = doc.id;
-    const { name, completed, slug } = data;
-    return { ...data, name, completed, slug, id };
+    return transformFirebaseHabit(doc);
   });
 }
 
 export async function getHabitById(id) {
   const habits = getHabitsCollection();
   const doc = await habits.doc(id).get();
-  return doc.exists ? doc.data() : undefined;
+  return doc.exists ? transformFirebaseHabit(doc) : undefined;
 }
 
 export async function getHabitBySlug(slug: string) {
@@ -45,7 +57,7 @@ export async function getHabitBySlug(slug: string) {
   if (snapshot.empty) {
     return undefined;
   }
-  return snapshot.docs[0].data();
+  return transformFirebaseHabit(snapshot.docs[0]);
 }
 
 export async function createHabit(habit) {
@@ -54,7 +66,7 @@ export async function createHabit(habit) {
     createdAt: new Date(),
   });
   const doc = await docRef.get();
-  return doc.data();
+  return transformFirebaseHabit(doc);
 }
 
 export function updateHabit(id, habit) {

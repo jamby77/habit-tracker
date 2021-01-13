@@ -1,8 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import { useLayout } from "../lib/layout";
-import HeadingMobile from "./HeadingMobile";
-import Messages from "./Messages";
+import { HeadingMobile, Messages } from "./index";
 
 const Layout: React.FC = ({ children }) => {
   const { title } = useLayout();

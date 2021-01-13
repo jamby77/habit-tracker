@@ -1,6 +1,6 @@
 import { AppProps } from "next/app";
 import React from "react";
-import Layout from "../components/Layout";
+import { Layout } from "../components";
 import { AuthProvider } from "../lib/auth";
 import { HabitProvider } from "../lib/HabitProvider";
 import { LayoutProvider } from "../lib/layout";

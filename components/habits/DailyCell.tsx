@@ -1,17 +1,17 @@
 import cn from "clsx";
 import React from "react";
-import { useHabits } from "../lib/HabitProvider";
-import { HabitType } from "../lib/habits";
-import SkippedIcon from "../svg/skippedIcon";
-import SuccessIcon from "../svg/successIcon";
-import UnknownIcon from "../svg/unknownIcon";
+import { useHabits } from "../../lib/HabitProvider";
+import { HabitType } from "../../lib/habits";
+import SkippedIcon from "../../svg/skippedIcon";
+import SuccessIcon from "../../svg/successIcon";
+import UnknownIcon from "../../svg/unknownIcon";
 
 const Icons = {
   success: SuccessIcon,
   fail: SkippedIcon,
   unknown: UnknownIcon,
 };
-const HabitDailyCell = ({
+const DailyCell = ({
   habit,
   dateKey,
   disabled = false,
@@ -56,4 +56,4 @@ const HabitDailyCell = ({
   );
 };
 
-export default HabitDailyCell;
+export default DailyCell;

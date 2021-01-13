@@ -17,6 +17,8 @@ const SmallDevicesNav = ({ menuItems }) => {
     });
     if (match) {
       setCurrentItem(match.label);
+    } else {
+      setCurrentItem("Welcome");
     }
   }, [pathname]);
   if (!user) {
