@@ -29,7 +29,6 @@ export const useHabit = (habitSlug: string) => {
   const [habit, setHabit] = useState<HabitType>(null);
   useEffect(() => {
     findHabit(habitSlug).then((serverHabit) => {
-      console.log({ serverHabit });
       if (!serverHabit) {
         return;
       }
