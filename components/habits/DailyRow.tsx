@@ -2,6 +2,8 @@ import { format, isAfter, startOfToday } from "date-fns";
 import Link from "next/link";
 import React, { useState } from "react";
 import { dateFormat, HabitType } from "../../lib/habits";
+import DeleteIcon from "../../svg/deleteIcon";
+import EditIcon from "../../svg/editIcon";
 import { DailyCell } from "../index";
 
 function getRandomInt(max) {
@@ -21,14 +23,30 @@ const DailyRow: React.FC<{
       }}
     >
       <div
-        className="w-1/2 sm:w-40 h-8 flex-shrink-0 truncate static pr-4"
+        className="w-1/2 sm:w-40 h-full flex-shrink-0 pr-2 flex flex-row items-center justify-between"
         title={`${habit.name} - ${habit.description}`}
       >
-        <Link href={`/habits/${habit.slug}`}>
-          <a>{habit.name}</a>
-        </Link>
+        <div className="truncate h-8 flex-grow ">
+          <Link href={`/habits/${habit.slug}`}>
+            <a>{habit.name}</a>
+          </Link>
+        </div>
+        <div className="flex flex-col flex-shrink-0 flex-grow-0 w-10 h-14 py-1 pl-2 items-center justify-between">
+          <Link href={`/habits/edit/${habit.slug}`}>
+            <a className="w-6 h-6 text-gray-200 visited:text-gray-200 hover:text-gray-400 focus:text-gray-400">
+              <span className="sr-only">{habit.name}</span>
+              <EditIcon />
+            </a>
+          </Link>
+          <Link href={`/habits/delete/${habit.slug}`}>
+            <a className="w-6 h-6 text-gray-200 visited:text-gray-200 hover:text-gray-400 focus:text-gray-400">
+              <span className="sr-only">{habit.name}</span>
+              <DeleteIcon />
+            </a>
+          </Link>
+        </div>
       </div>
-      <div className="flex flex-row flex-shrink-0 justify-between flex-grow">
+      <div className="flex flex-row flex-shrink-0 items-center justify-between flex-grow">
         {days.map((day) => {
           const key = format(day, dateFormat);
           const disabled = isAfter(day, startOfToday());
