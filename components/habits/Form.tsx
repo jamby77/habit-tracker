@@ -15,7 +15,6 @@ const Form = ({ initialHabit, handleSubmit, submitting }) => {
   const [habit, setHabit] = useState(initialHabit);
   const handleKeydown = (event: KeyboardEvent) => {
     const { code } = event;
-    console.log(code);
     if (code === "Enter") {
       handleSubmit(habit);
     }

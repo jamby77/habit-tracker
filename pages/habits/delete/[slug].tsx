@@ -25,32 +25,32 @@ const DeleteHabit = () => {
 
   const handleDelete = (habitDelete) => {
     removeHabit(habitDelete).then(() => {
-      success(`${habitDelete.name} deleted!`);
+      success(`"${habitDelete.name}" deleted!`);
       refreshHabits(user.uid);
       setTimeout(() => {
-        router.push("/dashboard");
+        router.back();
       }, 100);
     });
   };
 
   if (!user || !habit) {
-    console.log({ user, habit });
     return null;
   }
   return (
     <Container>
       <Panel className="mx-4 sm:mx-10">
-        <FormContainer>
-          <Heading1>{`Are you sure you want to delete ${habit.name}?`}</Heading1>
-          <FormRow>
+        <FormContainer className="max-w-screen-sm mx-auto">
+          <Heading1 className="text-center">{`Are you sure you want to delete this habit?`}</Heading1>
+          <p className="text-center text-xl font-bold italic">{habit.name}</p>
+          <FormRow className="gap-4 mt-20">
             <PrimaryButton
               onClick={() => {
-                router.push("/dashboard");
+                router.back();
               }}
             >
-              Cancel and return to dashboard
+              Cancel and go back
             </PrimaryButton>
-            <DangerButton onClick={handleDelete}>
+            <DangerButton onClick={() => handleDelete(habit)}>
               Delete this habit
             </DangerButton>
           </FormRow>
