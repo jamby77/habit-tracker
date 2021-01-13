@@ -6,6 +6,7 @@ type HabitProviderType = {
   habits?: HabitType[];
   toggleHabit?: (habit: HabitType, day: string) => void;
   refreshHabits?: (userId: string) => void;
+  userHasAccessToHabit?: (habit: HabitType) => boolean;
 };
 const habitsContext = React.createContext<HabitProviderType>({});
 
@@ -45,10 +46,15 @@ const useHabitsProvider = () => {
     });
   };
 
+  const userHasAccessToHabit = (habit) => {
+    return habit && user && user.uid === habit.uid;
+  };
+
   return {
     habits,
     toggleHabit,
     refreshHabits,
+    userHasAccessToHabit,
   };
 };
 
