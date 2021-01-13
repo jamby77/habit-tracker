@@ -22,24 +22,30 @@ const DailyRow: React.FC<{
         backgroundColor: `hsl(${tint}, 100%, 90%)`,
       }}
     >
-      <div
-        className="w-1/2 sm:w-40 h-full flex-shrink-0 pr-2 flex flex-row items-center justify-between"
-        title={`${habit.name} - ${habit.description}`}
-      >
-        <div className="truncate h-8 flex-grow ">
+      <div className="w-1/2 sm:w-40 h-full flex-shrink-0 pr-2 flex flex-row items-center justify-between">
+        <div
+          className="truncate h-8 flex-grow"
+          title={`${habit.name} - ${habit.description}`}
+        >
           <Link href={`/habits/${habit.slug}`}>
             <a>{habit.name}</a>
           </Link>
         </div>
         <div className="flex flex-col flex-shrink-0 flex-grow-0 w-10 h-14 py-1 pl-2 items-center justify-between">
           <Link href={`/habits/edit/${habit.slug}`}>
-            <a className="w-6 h-6 text-gray-200 visited:text-gray-200 hover:text-gray-400 focus:text-gray-400">
+            <a
+              title={`Edit "${habit.name}"`}
+              className="w-6 h-6 sm:text-gray-200 text-gray-400 hover:text-gray-400 focus:text-gray-400"
+            >
               <span className="sr-only">{habit.name}</span>
               <EditIcon />
             </a>
           </Link>
           <Link href={`/habits/delete/${habit.slug}`}>
-            <a className="w-6 h-6 text-gray-200 visited:text-gray-200 hover:text-gray-400 focus:text-gray-400">
+            <a
+              title={`Delete "${habit.name}"`}
+              className="w-6 h-6 sm:text-gray-200 text-gray-400 hover:text-gray-400 focus:text-gray-400"
+            >
               <span className="sr-only">{habit.name}</span>
               <DeleteIcon />
             </a>
