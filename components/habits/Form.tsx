@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Occurrence } from "../../pages/habits/add";
+import { Occurrence } from "../../lib/habits";
 import { Icon, Input, Label, SuccessButton, Textarea } from "../form";
 import Select from "../form/Select";
 import {

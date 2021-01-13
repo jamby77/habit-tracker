@@ -12,7 +12,6 @@ const ViewHabit = () => {
   const habit = useHabit(slug as string);
 
   if (!user || !habit) {
-    console.log({ user, habit });
     return null;
   }
   return <View habit={habit} />;

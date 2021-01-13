@@ -4,23 +4,9 @@ import slug from "slug";
 import Form from "../../components/habits/Form";
 import { useUser } from "../../lib/auth";
 import { useHabits } from "../../lib/HabitProvider";
-import { addHabit } from "../../lib/habits";
+import { addHabit, baseHabit } from "../../lib/habits";
 import { useLayout, useTitle } from "../../lib/layout";
 
-export const Occurrence = {
-  Daily: "d",
-  Weekly: "w",
-  Monthly: "m",
-  Yearly: "y",
-};
-const baseHabit = {
-  uid: "",
-  name: "",
-  description: "",
-  occurrence: Occurrence.Daily,
-  slug: "",
-  completed: {},
-};
 const Add = () => {
   const user = useUser();
   const { success } = useLayout();

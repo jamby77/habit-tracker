@@ -9,11 +9,31 @@ import {
 
 export const dateFormat = "yyyy-MM-dd";
 
+export enum Occurrence {
+  Daily = "d",
+  Weekly = "w",
+  Monthly = "m",
+  Yearly = "y",
+}
+
+export const baseHabit = {
+  uid: "",
+  name: "",
+  description: "",
+  occurrence: Occurrence.Daily,
+  slug: "",
+  completed: {},
+};
+
 export type HabitType = {
   id?: string;
+  uid?: string;
   slug: string;
   name: string;
   description?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  occurrence: Occurrence;
   completed: {
     [date: string]: boolean;
   };
