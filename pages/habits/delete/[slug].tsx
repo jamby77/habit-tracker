@@ -7,7 +7,7 @@ import {
   Heading1,
   Panel,
 } from "../../../components";
-import { Button, OutlineButton } from "../../../components/form";
+import { DangerButton, PrimaryButton } from "../../../components/form";
 import { useAuth } from "../../../lib/auth";
 import { useHabits } from "../../../lib/HabitProvider";
 import { removeHabit, useHabit } from "../../../lib/habits";
@@ -43,16 +43,16 @@ const DeleteHabit = () => {
         <FormContainer>
           <Heading1>{`Are you sure you want to delete ${habit.name}?`}</Heading1>
           <FormRow>
-            <Button
+            <PrimaryButton
               onClick={() => {
                 router.push("/dashboard");
               }}
             >
               Cancel and return to dashboard
-            </Button>
-            <OutlineButton onClick={handleDelete}>
+            </PrimaryButton>
+            <DangerButton onClick={handleDelete}>
               Delete this habit
-            </OutlineButton>
+            </DangerButton>
           </FormRow>
         </FormContainer>
       </Panel>

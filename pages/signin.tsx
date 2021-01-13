@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Container from "../components/Container";
-import Button from "../components/form/Button";
-import OutlineButton from "../components/form/OutlineButton";
+import { PrimaryButton, SecondaryButton } from "../components/form";
 import LoginForm from "../components/LoginForm";
 import Notification, { NotificationType } from "../components/Notification";
 import Panel from "../components/Panel";
@@ -27,33 +26,33 @@ const Signin = () => {
       <Panel className="login-panel">
         <div className="flex flex-row w-full pt-10 px-5 md:px-10">
           {loginOrRegister === REGISTER ? (
-            <Button
+            <PrimaryButton
               className="rounded-r-none"
               onClick={() => {
                 setLogin(LOGIN);
               }}
             >
               Log in
-            </Button>
+            </PrimaryButton>
           ) : (
-            <OutlineButton disabled className="rounded-r-none">
+            <SecondaryButton disabled className="rounded-r-none">
               Log in
-            </OutlineButton>
+            </SecondaryButton>
           )}
 
           {loginOrRegister === LOGIN ? (
-            <Button
+            <PrimaryButton
               className="rounded-l-none"
               onClick={() => {
                 setLogin(REGISTER);
               }}
             >
               Register
-            </Button>
+            </PrimaryButton>
           ) : (
-            <OutlineButton disabled className="rounded-l-none">
+            <SecondaryButton disabled className="rounded-l-none">
               Register
-            </OutlineButton>
+            </SecondaryButton>
           )}
         </div>
         {submitting && (

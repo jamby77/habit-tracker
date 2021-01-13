@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Occurrence } from "../pages/habits/add";
-import { Button, Icon, Input, Label, Textarea } from "./form";
+import { Icon, Input, Label, SuccessButton, Textarea } from "./form";
 import Select from "./form/Select";
 import {
   Container,
@@ -92,9 +92,12 @@ const HabitForm = ({ initialHabit, handleSubmit, submitting }) => {
           </FormRow>
           <FormRow>
             <FormGroup>
-              <Button onClick={() => handleSubmit(habit)} disabled={submitting}>
+              <SuccessButton
+                onClick={() => handleSubmit(habit)}
+                disabled={submitting}
+              >
                 Save habit
-              </Button>
+              </SuccessButton>
             </FormGroup>
           </FormRow>
         </FormContainer>
