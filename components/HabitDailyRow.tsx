@@ -1,10 +1,13 @@
 import { format, isAfter, startOfToday } from "date-fns";
+import Link from "next/link";
 import React, { useState } from "react";
 import { dateFormat, HabitType } from "../lib/habits";
 import HabitDailyCell from "./HabitDailyCell";
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
+
 const HabitDailyRow: React.FC<{
   habit: HabitType;
   days: Date[];
@@ -21,7 +24,9 @@ const HabitDailyRow: React.FC<{
         className="w-1/2 sm:w-40 h-8 flex-shrink-0 truncate static pr-4"
         title={`${habit.name} - ${habit.description}`}
       >
-        {habit.name}
+        <Link href={`/habits/${habit.slug}`}>
+          <a>{habit.name}</a>
+        </Link>
       </div>
       <div className="flex flex-row flex-shrink-0 justify-between flex-grow">
         {days.map((day) => {
