@@ -6,7 +6,7 @@ import firebase from "./firebase";
 import { useLayout } from "./layout";
 
 const authContext = createContext<{
-  user?: User;
+  user?: { state: UserStateType; user: AppUser };
   signin?: (user: {
     email: string;
     password: string;
@@ -51,15 +51,18 @@ export const useAuth = () => {
   return useContext(authContext);
 };
 
-export const useUser = (redirectTo?: string) => {
+export const useUser = () => {
   const { user } = useAuth();
   const router = useRouter();
   const path = router.pathname;
+  const signInPath = "/signin";
+
   useEffect(() => {
-    if (!user && user !== undefined) {
-      router.push("/signin");
-    } else {
-      router.push(redirectTo || path);
+    // if user is logged out, and path is not sign in path
+    if (path !== signInPath && user.state === "loggedOut") {
+      router.push(signInPath);
+    } else if (path === signInPath && user.state === "loggedIn") {
+      router.back();
     }
   }, [user]);
   return user;
@@ -68,9 +71,21 @@ export const useUser = (redirectTo?: string) => {
 export interface User extends firebase.User {
   firstName?: string;
   lastName?: string;
+  name?: string;
+  provider?: string;
+  imageUrl?: string;
 }
 
-const formatUser = (user: User) => {
+export interface AppUser {
+  uid: string;
+  email: string;
+  name: string;
+  firstName: string;
+  lastName: string;
+  provider: string;
+}
+
+const formatUser = (user: User): AppUser => {
   return {
     uid: user.uid,
     email: user.email,
@@ -81,8 +96,13 @@ const formatUser = (user: User) => {
   };
 };
 
+export type UserStateType = "init" | "loggedIn" | "loggedOut";
+
 function useProvideAuth() {
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState<{ state: UserStateType; user: AppUser }>({
+    state: "init",
+    user: null,
+  });
   const { error } = useLayout();
 
   const handleUser = (rawUser: User | false | null, create = false) => {
@@ -90,18 +110,18 @@ function useProvideAuth() {
       const user = formatUser(rawUser);
       if (create) {
         createUser(user.uid, user)
-          .then(() => setUser(user))
+          .then(() => setUser({ state: "loggedIn", user }))
           .catch((err) => {
             console.dir(err);
             error(err.message);
           });
       } else {
-        setUser(user);
+        setUser({ state: "loggedIn", user });
       }
       return user;
     }
 
-    setUser(false);
+    setUser({ state: "loggedOut", user: null });
     return false;
   };
 

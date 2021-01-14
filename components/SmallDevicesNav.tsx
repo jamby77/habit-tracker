@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React,{ useEffect,useState } from "react";
 import { useAuth } from "../lib/auth";
 import MenuArrow from "../svg/menuArrow";
 import ProfileTop from "./ProfileTop";
 
 const SmallDevicesNav = ({ menuItems }) => {
-  const { user } = useAuth();
+  const {
+    user: { user },
+  } = useAuth();
   const router = useRouter();
   const { pathname } = router;
   const [currentItem, setCurrentItem] = useState("Welcome");

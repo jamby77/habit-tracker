@@ -15,7 +15,7 @@ const follow = {
 export const View = ({ habit }: { habit: HabitType }) => {
   const { userHasAccessToHabit } = useHabits();
   if (!userHasAccessToHabit(habit)) {
-    return;
+    return null;
   }
   const days = getDays(today, "week");
 

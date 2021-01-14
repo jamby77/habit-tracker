@@ -3,7 +3,10 @@ import React from "react";
 import { useAuth } from "../lib/auth";
 
 const ProfileTop = () => {
-  const { user, signout } = useAuth();
+  const {
+    user: { user },
+    signout,
+  } = useAuth();
   return (
     <div className="flex flex-col items-center">
       <Image
