@@ -1,6 +1,6 @@
 import cn from "clsx";
 import React from "react";
-import { ReactFCWithClassName } from "./index";
+import { ReactFCWithClassName } from "~c/index";
 
 const Panel: ReactFCWithClassName = ({ children, className, ...rest }) => {
   return (

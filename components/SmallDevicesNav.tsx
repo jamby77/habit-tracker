@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React,{ useEffect,useState } from "react";
-import { useAuth } from "../lib/auth";
-import MenuArrow from "../svg/menuArrow";
+import React, { useEffect, useState } from "react";
+import { useAuth } from "~l/auth";
+import MenuArrow from "~s/menuArrow";
 import ProfileTop from "./ProfileTop";
 
 const SmallDevicesNav = ({ menuItems }) => {

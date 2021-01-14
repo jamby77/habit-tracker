@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { useAuth } from "../lib/auth";
+import { useAuth } from "~l/auth";
 
 const ProfileTop = () => {
   const {

@@ -1,7 +1,7 @@
 import React from "react";
-import { DisplayHabits } from "../components";
-import { useUser } from "../lib/auth";
-import { useTitle } from "../lib/layout";
+import { DisplayHabits } from "~c/index";
+import { useUser } from "~l/auth";
+import { useTitle } from "~l/layout";
 
 const weekly = () => {
   useTitle("Weekly habits");

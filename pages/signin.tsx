@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { Container, LoginForm, Panel, RegisterForm } from "../components";
-import { Info } from "../components/alerts";
-import { PrimaryButton, SecondaryButton } from "../components/form";
-import { useAuth } from "../lib/auth";
+import { Info } from "~c/alerts";
+import { PrimaryButton, SecondaryButton } from "~c/form";
+import { Container, LoginForm, Panel, RegisterForm } from "~c/index";
+import { useAuth } from "~l/auth";
 
 const LOGIN = false;
 const REGISTER = true;
