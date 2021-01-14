@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { Occurrence } from "../../lib/habits";
-import { Icon, Input, Label, SuccessButton, Textarea } from "../form";
-import Select from "../form/Select";
+import Select from "~c/form/Select";
 import {
   Container,
   FormContainer,
@@ -9,7 +7,9 @@ import {
   FormRow,
   Heading1,
   Panel,
-} from "../index";
+} from "~c/index";
+import { Occurrence } from "~l/habits";
+import { Icon, Input, Label, SuccessButton, Textarea } from "../form";
 
 const Form = ({ initialHabit, handleSubmit, submitting }) => {
   const [habit, setHabit] = useState(initialHabit);

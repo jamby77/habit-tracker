@@ -1,5 +1,5 @@
 import React from "react";
-import Habit from "../svg/habit";
+import Habit from "~s/habit";
 
 const Logo = () => {
   return (

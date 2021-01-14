@@ -1,9 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import { useUser } from "~l/auth";
+import { useHabits } from "~l/HabitProvider";
+import { useTitle } from "~l/layout";
 import { Panel } from "../components";
-import { useUser } from "../lib/auth";
-import { useHabits } from "../lib/HabitProvider";
-import { useTitle } from "../lib/layout";
 
 const Dashboard = () => {
   useTitle("Dashboard");

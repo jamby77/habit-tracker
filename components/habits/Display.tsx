@@ -1,13 +1,13 @@
 import React from "react";
+import { DailyRow, DaysHeading } from "~c/index";
 import {
   currentMonthAsString,
   currentWeekAsString,
   getDays,
   today,
-} from "../../lib/dates";
-import { useHabits } from "../../lib/HabitProvider";
-import { HabitDisplayType } from "../../lib/habits";
-import { DailyRow, DaysHeading } from "../index";
+} from "~l/dates";
+import { useHabits } from "~l/HabitProvider";
+import { HabitDisplayType } from "~l/habits";
 
 const Display = ({ type }: { type: HabitDisplayType }) => {
   const { habits } = useHabits();

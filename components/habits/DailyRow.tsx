@@ -1,10 +1,10 @@
 import { format, isAfter, startOfToday } from "date-fns";
 import Link from "next/link";
 import React, { useState } from "react";
-import { dateFormat, HabitType } from "../../lib/habits";
-import DeleteIcon from "../../svg/deleteIcon";
-import EditIcon from "../../svg/editIcon";
-import { DailyCell } from "../index";
+import { DailyCell } from "~c/index";
+import { dateFormat, HabitType } from "~l/habits";
+import DeleteIcon from "~s/deleteIcon";
+import EditIcon from "~s/editIcon";
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));

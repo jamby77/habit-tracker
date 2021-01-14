@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import { useAuth } from "../lib/auth";
-import Plus from "../svg/plus";
+import { useAuth } from "~l/auth";
+import Plus from "~s/plus";
 import { Logo } from "./index";
 import ProfileTop from "./ProfileTop";
 import SmallDevicesNav from "./SmallDevicesNav";
