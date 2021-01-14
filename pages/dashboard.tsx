@@ -7,9 +7,9 @@ import { useTitle } from "../lib/layout";
 
 const Dashboard = () => {
   useTitle("Dashboard");
-  const user = useUser();
+  const { state, user } = useUser();
   const { habits } = useHabits();
-  if (user === undefined) {
+  if (state === "init") {
     return <div>Loading ...</div>;
   }
   if (!user) {

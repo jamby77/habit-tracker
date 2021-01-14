@@ -8,13 +8,13 @@ import {
   Panel,
 } from "../../../components";
 import { DangerButton, PrimaryButton } from "../../../components/form";
-import { useAuth } from "../../../lib/auth";
+import { useUser } from "../../../lib/auth";
 import { useHabits } from "../../../lib/HabitProvider";
 import { removeHabit, useHabit } from "../../../lib/habits";
 import { useLayout, useTitle } from "../../../lib/layout";
 
 const DeleteHabit = () => {
-  const { user } = useAuth();
+  const { user } = useUser();
   useTitle("Delete Habit");
   const router = useRouter();
   const { success } = useLayout();
@@ -22,6 +22,11 @@ const DeleteHabit = () => {
 
   const { slug } = router.query;
   const habit = useHabit(slug as string);
+
+  const { userHasAccessToHabit } = useHabits();
+  if (!userHasAccessToHabit(habit)) {
+    return null;
+  }
 
   const handleDelete = (habitDelete) => {
     removeHabit(habitDelete).then(() => {
@@ -33,9 +38,6 @@ const DeleteHabit = () => {
     });
   };
 
-  if (!user || !habit) {
-    return null;
-  }
   return (
     <Container>
       <Panel className="mx-4 sm:mx-10">

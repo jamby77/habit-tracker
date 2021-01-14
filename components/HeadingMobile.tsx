@@ -13,7 +13,9 @@ const menu = [
 ];
 
 const HeadingMobile: React.FC = () => {
-  const { user } = useAuth();
+  const {
+    user: { user },
+  } = useAuth();
   return (
     <div className="HeadingMobile bg-white shadow-lg flex flex-row justify-between px-4 py-2 items-center sm:px-8 sm:py-4">
       <Link href={"/"}>

@@ -3,13 +3,13 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import slugify from "slug";
 import Form from "../../../components/habits/Form";
-import { useAuth } from "../../../lib/auth";
+import { useUser } from "../../../lib/auth";
 import { useHabits } from "../../../lib/HabitProvider";
 import { editHabit, findHabit, HabitType } from "../../../lib/habits";
 import { useLayout, useTitle } from "../../../lib/layout";
 
 const EditHabit = () => {
-  const { user } = useAuth();
+  const { user } = useUser();
   const [habit, setHabit] = useState<HabitType>(null);
   useTitle("Edit Habit");
   const router = useRouter();
@@ -28,6 +28,10 @@ const EditHabit = () => {
     });
   }, [slug]);
 
+  const { userHasAccessToHabit } = useHabits();
+  if (!userHasAccessToHabit(habit)) {
+    return null;
+  }
   const handleSubmit = (habitUpdate) => {
     setSubmitting(true);
     const userHabit = { ...habitUpdate };
@@ -42,10 +46,6 @@ const EditHabit = () => {
     });
   };
 
-  if (!user || !habit) {
-    console.log({ user, habit });
-    return null;
-  }
   return (
     <Form
       initialHabit={habit}

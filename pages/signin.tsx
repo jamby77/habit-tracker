@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, LoginForm, Panel, RegisterForm } from "../components";
 import { Info } from "../components/alerts";
 import { PrimaryButton, SecondaryButton } from "../components/form";
@@ -9,15 +9,10 @@ const LOGIN = false;
 const REGISTER = true;
 
 const Signin = () => {
-  const { signup, signin, user } = useAuth();
+  const { signup, signin } = useAuth();
   const router = useRouter();
   const [loginOrRegister, setLogin] = useState(LOGIN);
   const [submitting, setSubmitting] = useState(false);
-  useEffect(() => {
-    if (user) {
-      router.replace("/dashboard");
-    }
-  }, []);
   return (
     <Container>
       <Panel className="login-panel">

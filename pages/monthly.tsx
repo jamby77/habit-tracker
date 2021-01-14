@@ -5,7 +5,7 @@ import { useTitle } from "../lib/layout";
 
 const monthly = () => {
   useTitle("Monthly habits");
-  const user = useUser();
+  const { user } = useUser();
   if (!user) {
     return null;
   }

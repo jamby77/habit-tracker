@@ -12,7 +12,9 @@ const habitsContext = React.createContext<HabitProviderType>({});
 
 const useHabitsProvider = () => {
   const [habits, setHabits] = useState<HabitType[]>([]);
-  const { user } = useAuth();
+  const {
+    user: { user },
+  } = useAuth();
   const refreshHabits = (uid) => {
     getHabits(uid).then((serverHabits) => {
       setHabits(serverHabits);
