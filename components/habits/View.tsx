@@ -1,9 +1,9 @@
 import { format, formatDistance, isAfter, startOfToday } from "date-fns";
 import React from "react";
-import { getDays, today } from "../../lib/dates";
-import { useHabits } from "../../lib/HabitProvider";
-import { dateFormat, HabitType, Occurrence } from "../../lib/habits";
-import { Container, DailyCell, Heading1, Panel } from "../index";
+import { Container, DailyCell, Heading1, Panel } from "~c/index";
+import { getDays, today } from "~l/dates";
+import { useHabits } from "~l/HabitProvider";
+import { dateFormat, HabitType, Occurrence } from "~l/habits";
 
 const follow = {
   [Occurrence.Daily]: "day",
@@ -15,7 +15,7 @@ const follow = {
 export const View = ({ habit }: { habit: HabitType }) => {
   const { userHasAccessToHabit } = useHabits();
   if (!userHasAccessToHabit(habit)) {
-    return;
+    return null;
   }
   const days = getDays(today, "week");
 

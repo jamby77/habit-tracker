@@ -1,14 +1,14 @@
 import { nanoid } from "nanoid";
-import React, { useState } from "react";
+import React,{ useState } from "react";
 import slug from "slug";
 import Form from "../../components/habits/Form";
 import { useUser } from "../../lib/auth";
 import { useHabits } from "../../lib/HabitProvider";
-import { addHabit, baseHabit } from "../../lib/habits";
-import { useLayout, useTitle } from "../../lib/layout";
+import { addHabit,baseHabit } from "../../lib/habits";
+import { useLayout,useTitle } from "../../lib/layout";
 
 const Add = () => {
-  const user = useUser();
+  const { user } = useUser();
   const { success } = useLayout();
   const { refreshHabits } = useHabits();
   useTitle("Add Habit");

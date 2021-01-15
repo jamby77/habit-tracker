@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { useLayout } from "../lib/layout";
+import { FormContainer, FormGroup, FormRow, Heading1 } from "~c/index";
+import { useLayout } from "~l/layout";
 import { Icon, Input, Label, SuccessButton } from "./form";
-import FormContainer from "./FormContainer";
-import FormGroup from "./FormGroup";
-import FormRow from "./FormRow";
-import Heading1 from "./Heading1";
 
 const RegisterForm = ({
   onRegister,

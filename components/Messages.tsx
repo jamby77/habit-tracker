@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import { useLayout } from "../lib/layout";
-import { Notification } from "./index";
+import { Notification } from "~c/index";
+import { useLayout } from "~l/layout";
 import { NotificationType } from "./Notification";
 
 const Messages = () => {

@@ -1,9 +1,9 @@
 import { AppProps } from "next/app";
 import React from "react";
-import { Layout } from "../components";
-import { AuthProvider } from "../lib/auth";
-import { HabitProvider } from "../lib/HabitProvider";
-import { LayoutProvider } from "../lib/layout";
+import { Layout } from "~c/index";
+import { AuthProvider } from "~l/auth";
+import { HabitProvider } from "~l/HabitProvider";
+import { LayoutProvider } from "~l/layout";
 import "../styles/global.css";
 
 const App = ({ Component, pageProps }: AppProps) => {

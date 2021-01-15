@@ -1,11 +1,11 @@
 import React from "react";
+import { useUser } from "~l/auth";
+import { useTitle } from "~l/layout";
 import { DisplayHabits } from "../components";
-import { useUser } from "../lib/auth";
-import { useTitle } from "../lib/layout";
 
 const monthly = () => {
   useTitle("Monthly habits");
-  const user = useUser();
+  const { user } = useUser();
   if (!user) {
     return null;
   }

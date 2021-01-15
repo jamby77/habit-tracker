@@ -1,10 +1,10 @@
 import cn from "clsx";
 import React from "react";
-import { useHabits } from "../../lib/HabitProvider";
-import { HabitType } from "../../lib/habits";
-import SkippedIcon from "../../svg/skippedIcon";
-import SuccessIcon from "../../svg/successIcon";
-import UnknownIcon from "../../svg/unknownIcon";
+import { useHabits } from "~l/HabitProvider";
+import { HabitType } from "~l/habits";
+import SkippedIcon from "~s/skippedIcon";
+import SuccessIcon from "~s/successIcon";
+import UnknownIcon from "~s/unknownIcon";
 
 const Icons = {
   success: SuccessIcon,
