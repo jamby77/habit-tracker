@@ -20,13 +20,16 @@ function getHabitsCollection() {
 const transformFirebaseHabit = (habitDoc: DocumentData): HabitType => {
   const data = habitDoc.data();
   const id = habitDoc.id;
-  const { name, completed, slug, createdAt, updatedAt } = data;
+  const { name, completed, slug, createdAt, updatedAt, toggledOn } = data;
   const result = { ...data, name, completed, slug, id };
   if (createdAt && typeof createdAt.toDate === "function") {
     result.createdAt = createdAt.toDate();
   }
   if (updatedAt && typeof updatedAt.toDate === "function") {
     result.updatedAt = updatedAt.toDate();
+  }
+  if (toggledOn && typeof toggledOn.toDate === "function") {
+    result.toggledOn = toggledOn.toDate();
   }
   return result;
 };

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { createRef } from "react";
+import Animator from "~c/Animator";
 import { DailyRow, DaysHeading } from "~c/index";
 import {
   currentMonthAsString,
@@ -12,6 +13,21 @@ import { HabitDisplayType } from "~l/habits";
 const Display = ({ type }: { type: HabitDisplayType }) => {
   const { habits } = useHabits();
   const days = getDays(today, type);
+  const sortedHabits = [...habits];
+  sortedHabits.sort((hA, hB) => {
+    const { toggledOn: a } = hA;
+    const { toggledOn: b } = hB;
+    if (!a && !b) {
+      return 0;
+    }
+    if (!a) {
+      return 1;
+    }
+    if (!b) {
+      return -1;
+    }
+    return a.getTime() - b.getTime();
+  });
   return (
     <div className="DisplayHabits py-4 px-4 sm:px-8 overflow-hidden h-screen w-screen">
       <h2 className="text-3xl text-center py-4">{`Daily habits (${
@@ -31,9 +47,18 @@ const Display = ({ type }: { type: HabitDisplayType }) => {
           </div>
         </div>
         <div className="tracker-body flex flex-col gap-1 w-full">
-          {habits.map((habit) => {
-            return <DailyRow key={habit.name} days={days} habit={habit} />;
-          })}
+          <Animator>
+            {sortedHabits.map((habit) => {
+              return (
+                <DailyRow
+                  ref={createRef<HTMLDivElement>()}
+                  key={habit.name}
+                  days={days}
+                  habit={habit}
+                />
+              );
+            })}
+          </Animator>
         </div>
       </div>
     </div>
