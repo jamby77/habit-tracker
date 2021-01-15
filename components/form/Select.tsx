@@ -1,6 +1,6 @@
 import cn from "clsx";
 import React, { useEffect, useRef, useState } from "react";
-import { elementParentPath } from "../../lib/layout";
+import { elementParentPath } from "~l/layout";
 import Popover from "./select/Popover";
 import SelectedItem from "./select/SelectedItem";
 

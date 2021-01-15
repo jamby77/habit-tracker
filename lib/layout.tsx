@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { NotificationType } from "../components/Notification";
+import { NotificationType } from "~c/Notification";
 
 const layoutContext = createContext<{
   title?: string;
