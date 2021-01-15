@@ -35,6 +35,7 @@ const useHabitsProvider = () => {
     const completed = habit.completed[day] || false;
     const updatedHabit: HabitType = {
       ...habit,
+      toggledOn: new Date(),
       completed: { ...habit.completed, [day]: !completed },
     };
     editHabit(updatedHabit).then(() => {
