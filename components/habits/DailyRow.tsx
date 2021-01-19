@@ -2,6 +2,7 @@ import { format, isAfter, startOfToday } from "date-fns";
 import Link from "next/link";
 import React, { ForwardedRef, forwardRef } from "react";
 import { DailyCell } from "~c/index";
+import { useHabits } from "~l/HabitProvider";
 import { dateFormat, HabitType } from "~l/habits";
 import DeleteIcon from "~s/deleteIcon";
 import EditIcon from "~s/editIcon";
@@ -13,6 +14,8 @@ const DailyRow = forwardRef(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const tint = getRandomInt(255);
+    const { toggleHabit } = useHabits();
+
     return (
       <div
         ref={ref}
@@ -61,6 +64,9 @@ const DailyRow = forwardRef(
                 dateKey={key}
                 disabled={disabled}
                 key={key}
+                handleToggle={() => {
+                  toggleHabit(habit, key);
+                }}
               />
             );
           })}

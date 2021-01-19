@@ -4,7 +4,11 @@ import { editHabit, getHabits, HabitType } from "./habits";
 
 type HabitProviderType = {
   habits?: HabitType[];
-  toggleHabit?: (habit: HabitType, day: string) => void;
+  toggleHabit?: (
+    habit: HabitType,
+    day: string,
+    callback?: (habit: HabitType) => void
+  ) => void;
   refreshHabits?: (userId: string) => void;
   userHasAccessToHabit?: (habit: HabitType) => boolean;
 };
@@ -28,7 +32,11 @@ const useHabitsProvider = () => {
     refreshHabits(user.uid);
   }, [user]);
 
-  const toggleHabit = (habit: HabitType, day: string) => {
+  const toggleHabit = (
+    habit: HabitType,
+    day: string,
+    callback?: (habit: HabitType) => void
+  ) => {
     console.log(habit, day);
     // change habit complete state
     // every invocation rotate complete state
@@ -40,6 +48,9 @@ const useHabitsProvider = () => {
       completed: { ...habit.completed, [day]: !completed },
     };
     editHabit(updatedHabit).then(() => {
+      if (callback) {
+        callback(updatedHabit);
+      }
       const updatedHabits = habits.map((h) => {
         if (h.id === habit.id) {
           return updatedHabit;
