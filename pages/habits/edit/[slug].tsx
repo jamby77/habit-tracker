@@ -2,11 +2,11 @@ import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import slugify from "slug";
-import Form from "../../../components/habits/Form";
-import { useUser } from "../../../lib/auth";
-import { useHabits } from "../../../lib/HabitProvider";
-import { editHabit, findHabit, HabitType } from "../../../lib/habits";
-import { useLayout, useTitle } from "../../../lib/layout";
+import Form from "~c/habits/Form";
+import { useUser } from "~l/auth";
+import { useHabits } from "~l/HabitProvider";
+import { editHabit, findHabit, HabitType } from "~l/habits";
+import { useLayout, useTitle } from "~l/layout";
 
 const EditHabit = () => {
   const { user } = useUser();

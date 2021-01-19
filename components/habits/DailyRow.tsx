@@ -1,27 +1,24 @@
 import { format, isAfter, startOfToday } from "date-fns";
 import Link from "next/link";
-import React, { ForwardedRef, forwardRef, useState } from "react";
+import React, { ForwardedRef, forwardRef } from "react";
 import { DailyCell } from "~c/index";
 import { dateFormat, HabitType } from "~l/habits";
 import DeleteIcon from "~s/deleteIcon";
 import EditIcon from "~s/editIcon";
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
+import { getHslBackgroundColor, getRandomInt } from "../../utils/helper";
 
 const DailyRow = forwardRef(
   (
     { habit, days }: { habit: HabitType; days: Date[] },
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const [tint] = useState(getRandomInt(255));
+    const tint = getRandomInt(255);
     return (
       <div
         ref={ref}
         className="HabitDailyRow flex flex-row flex-shrink-0 bg-white p-4 gap-1 overflow-x-auto rounded-lg"
         style={{
-          backgroundColor: `hsl(${tint}, 100%, 90%)`,
+          backgroundColor: getHslBackgroundColor(tint),
         }}
       >
         <div className="w-1/2 sm:w-40 h-full flex-shrink-0 pr-2 flex flex-row items-center justify-between">
@@ -39,7 +36,7 @@ const DailyRow = forwardRef(
                 title={`Edit "${habit.name}"`}
                 className="w-6 h-6 sm:text-gray-200 text-gray-400 hover:text-gray-400 focus:text-gray-400"
               >
-                <span className="sr-only">{habit.name}</span>
+                <span className="sr-only">{`Edit "${habit.name}"`}</span>
                 <EditIcon />
               </a>
             </Link>
@@ -48,7 +45,7 @@ const DailyRow = forwardRef(
                 title={`Delete "${habit.name}"`}
                 className="w-6 h-6 sm:text-gray-200 text-gray-400 hover:text-gray-400 focus:text-gray-400"
               >
-                <span className="sr-only">{habit.name}</span>
+                <span className="sr-only">{`Delete "${habit.name}"`}</span>
                 <DeleteIcon />
               </a>
             </Link>

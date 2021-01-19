@@ -9,6 +9,7 @@ import {
   Panel,
 } from "~c/index";
 import { Occurrence } from "~l/habits";
+import { getHslBackgroundColor, getRandomInt } from "../../utils/helper";
 import { Icon, Input, Label, SuccessButton, Textarea } from "../form";
 
 const Form = ({ initialHabit, handleSubmit, submitting }) => {
@@ -19,16 +20,23 @@ const Form = ({ initialHabit, handleSubmit, submitting }) => {
       handleSubmit(habit);
     }
   };
+  const tint = getRandomInt(255);
+
   return (
     <Container>
-      <Panel className="mx-4 sm:mx-10">
+      <Panel className="mx-4 sm:mx-10 max-w-3xl">
         <FormContainer>
-          <div className="text-center mb-10">
+          <header
+            className="text-center mb-10"
+            style={{
+              backgroundColor: getHslBackgroundColor(tint),
+            }}
+          >
             <Heading1 className="text-center">
               {habit.uid ? `Edit "${habit.name}"` : "Add habit"}
             </Heading1>
             <p>Enter habit details and save it</p>
-          </div>
+          </header>
           <FormRow>
             <FormGroup>
               <Label htmlFor="habitName">Habit name *</Label>
