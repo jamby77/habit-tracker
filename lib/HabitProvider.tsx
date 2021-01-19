@@ -29,6 +29,7 @@ const useHabitsProvider = () => {
   }, [user]);
 
   const toggleHabit = (habit: HabitType, day: string) => {
+    console.log(habit, day);
     // change habit complete state
     // every invocation rotate complete state
     // undefined -> true -> false -> true -> false...
@@ -40,7 +41,7 @@ const useHabitsProvider = () => {
     };
     editHabit(updatedHabit).then(() => {
       const updatedHabits = habits.map((h) => {
-        if (h === habit) {
+        if (h.id === habit.id) {
           return updatedHabit;
         }
         return h;
