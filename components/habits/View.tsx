@@ -1,6 +1,6 @@
 import { format, formatDistance, isAfter, startOfToday } from "date-fns";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Container, DailyCell, Heading1, Panel } from "~c/index";
 import { getDays, today } from "~l/dates";
 import { useHabits } from "~l/HabitProvider";
@@ -19,7 +19,8 @@ const follow = {
 };
 
 export const View = ({ habit }: { habit: HabitType }) => {
-  const { userHasAccessToHabit } = useHabits();
+  const [viewHabit, setHabit] = useState(habit);
+  const { userHasAccessToHabit, toggleHabit } = useHabits();
   if (!userHasAccessToHabit(habit)) {
     return null;
   }
@@ -36,40 +37,40 @@ export const View = ({ habit }: { habit: HabitType }) => {
           }}
         >
           <div className="flex absolute right-4 gap-4 w-28 justify-center">
-            <Link href={`/habits/edit/${habit.slug}`}>
+            <Link href={`/habits/edit/${viewHabit.slug}`}>
               <a
                 style={{
                   color: getHslTextColor(tint),
                 }}
-                title={`Edit "${habit.name}"`}
+                title={`Edit "${viewHabit.name}"`}
                 className="w-6 h-6 hover:underline focus:underline"
               >
                 Edit
               </a>
             </Link>
-            <Link href={`/habits/delete/${habit.slug}`}>
+            <Link href={`/habits/delete/${viewHabit.slug}`}>
               <a
                 style={{
                   color: getHslTextColor(tint),
                 }}
-                title={`Delete "${habit.name}"`}
+                title={`Delete "${viewHabit.name}"`}
                 className="w-6 h-6 hover:underline focus:underline"
               >
                 Delete
               </a>
             </Link>
           </div>
-          <Heading1 className="">{habit.name}</Heading1>
-          <p className="text-gray-600">{habit.description}</p>
+          <Heading1 className="">{viewHabit.name}</Heading1>
+          <p className="text-gray-600">{viewHabit.description}</p>
         </header>
         <article className="px-4 py-4">
           <p>
             Created:{" "}
-            <span>{formatDistance(habit.createdAt, new Date())} ago</span>
+            <span>{formatDistance(viewHabit.createdAt, new Date())} ago</span>
           </p>
           <p>
             You should try to execute this habit every{" "}
-            {follow[habit.occurrence]}
+            {follow[viewHabit.occurrence]}
           </p>
           <div className="flex flex-col gap-2 my-4 h-full overflow-auto max-h-96">
             {/* render current month, there will be potentially weekly view, daily view with option for notes,
@@ -99,9 +100,12 @@ export const View = ({ habit }: { habit: HabitType }) => {
                   </div>
                   <div className="flex-grow flex justify-center py-3 px-6 ">
                     <DailyCell
-                      habit={habit}
+                      habit={viewHabit}
                       dateKey={key}
                       disabled={disabled}
+                      handleToggle={() => {
+                        toggleHabit(viewHabit, key, (habit) => setHabit(habit));
+                      }}
                     />
                   </div>
                 </div>
