@@ -1,11 +1,11 @@
 import React from "react";
 export { default as Container } from "./Container";
-export { default as DaysHeading } from "./DaysHeading";
 export { default as FormContainer } from "./FormContainer";
 export { default as FormGroup } from "./FormGroup";
 export { default as FormRow } from "./FormRow";
 export { default as DailyCell } from "./habits/DailyCell";
 export { default as DailyRow } from "./habits/DailyRow";
+export { default as DaysHeading } from "./habits/DaysHeading";
 export { default as DisplayHabits } from "./habits/Display";
 export { default as Heading1 } from "./Heading1";
 export { default as HeadingMobile } from "./HeadingMobile";
