@@ -26,7 +26,7 @@ export const View = ({ habit }: { habit: HabitType }) => {
   }
   const days = getDays(today, "week");
 
-  const tint = getRandomInt(255);
+  const tint = getRandomInt(360);
   return (
     <Container>
       <Panel className="mx-4 sm:mx-10 max-w-3xl">
