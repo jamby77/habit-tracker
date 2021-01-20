@@ -13,7 +13,7 @@ const DailyRow = forwardRef(
     { habit, days }: { habit: HabitType; days: Date[] },
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const tint = getRandomInt(255);
+    const tint = getRandomInt(360);
     const { toggleHabit } = useHabits();
 
     return (

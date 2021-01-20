@@ -20,7 +20,7 @@ const Form = ({ initialHabit, handleSubmit, submitting }) => {
       handleSubmit(habit);
     }
   };
-  const tint = getRandomInt(255);
+  const tint = getRandomInt(360);
 
   return (
     <Container>
