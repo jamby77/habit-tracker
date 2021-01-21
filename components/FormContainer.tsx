@@ -10,10 +10,7 @@ const FromContainer: ReactFCWithClassName = ({
   return (
     <div
       {...rest}
-      className={cn(
-        "FromContainer w-full py-10 px-5 md:px-10 overflow-auto",
-        className
-      )}
+      className={cn("FromContainer w-full overflow-auto", className)}
     >
       {children}
     </div>

@@ -7,7 +7,7 @@ const Heading1: ReactFCWithClassName = ({ children, className, ...rest }) => {
     <h1
       {...rest}
       className={cn(
-        "Heading1 font-bold text-3xl text-gray-900 uppercase",
+        "Heading1 font-bold text-2xl text-gray-900 uppercase",
         className
       )}
     >

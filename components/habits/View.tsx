@@ -29,9 +29,9 @@ export const View = ({ habit }: { habit: HabitType }) => {
   const tint = getRandomInt(360);
   return (
     <Container>
-      <Panel className="mx-4 sm:mx-10 max-w-3xl">
+      <Panel className="mx-0 sm:mx-10 max-w-md w-full h-full">
         <header
-          className="text-center px-4 py-8 relative"
+          className="px-4 py-8 relative"
           style={{
             backgroundColor: getHslBackgroundColor(tint),
           }}

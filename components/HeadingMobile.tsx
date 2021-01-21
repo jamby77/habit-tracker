@@ -17,12 +17,13 @@ const HeadingMobile: React.FC = () => {
     user: { user },
   } = useAuth();
   return (
-    <div className="HeadingMobile bg-white shadow-lg flex flex-row justify-between px-4 py-2 items-center sm:px-8 sm:py-4">
+    <header className="HeadingMobile bg-white shadow-lg flex flex-row justify-between px-4 py-2 items-center sm:px-8 sm:py-4">
       <Link href={"/"}>
-        <a title="Dashboard">
+        <a title="Home">
           <Logo />
         </a>
       </Link>
+      <h1 className="sr-only">Habit tracker</h1>
       <div className="sm:hidden">
         <SmallDevicesNav menuItems={menu} />
       </div>
@@ -53,7 +54,7 @@ const HeadingMobile: React.FC = () => {
           </a>
         </Link>
       )}
-    </div>
+    </header>
   );
 };
 
