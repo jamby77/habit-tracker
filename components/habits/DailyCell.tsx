@@ -1,6 +1,5 @@
 import cn from "clsx";
 import React from "react";
-import { useHabits } from "~l/HabitProvider";
 import { HabitType } from "~l/habits";
 import SkippedIcon from "~s/skippedIcon";
 import SuccessIcon from "~s/successIcon";
@@ -14,13 +13,14 @@ const Icons = {
 const DailyCell = ({
   habit,
   dateKey,
+  handleToggle,
   disabled = false,
 }: {
   habit: HabitType;
   dateKey: string;
   disabled: boolean;
+  handleToggle: () => void;
 }) => {
-  const { toggleHabit } = useHabits();
   const done = habit.completed[dateKey] === true;
   const skipped = habit.completed[dateKey] === false;
   const unknown = habit.completed[dateKey] === undefined;
@@ -37,9 +37,9 @@ const DailyCell = ({
         disabled={disabled}
         key={`${habit.name}-${dateKey}`}
         className={cn(className)}
-        onClick={(e) => {
-          e.preventDefault();
-          toggleHabit(habit, dateKey);
+        onClick={(event) => {
+          event.preventDefault();
+          handleToggle();
         }}
       >
         <span className={`inline-block h-3/4 w-3/4`}>

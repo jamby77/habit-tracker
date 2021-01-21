@@ -1,17 +1,11 @@
 import { useRouter } from "next/router";
 import React from "react";
-import {
-  Container,
-  FormContainer,
-  FormRow,
-  Heading1,
-  Panel,
-} from "../../../components";
-import { DangerButton, PrimaryButton } from "../../../components/form";
-import { useUser } from "../../../lib/auth";
-import { useHabits } from "../../../lib/HabitProvider";
-import { removeHabit, useHabit } from "../../../lib/habits";
-import { useLayout, useTitle } from "../../../lib/layout";
+import { DangerButton, PrimaryButton } from "~c/form";
+import { Container, FormContainer, FormRow, Heading1, Panel } from "~c/index";
+import { useUser } from "~l/auth";
+import { useHabits } from "~l/HabitProvider";
+import { removeHabit, useHabit } from "~l/habits";
+import { useLayout, useTitle } from "~l/layout";
 
 const DeleteHabit = () => {
   const { user } = useUser();
@@ -40,10 +34,14 @@ const DeleteHabit = () => {
 
   return (
     <Container>
-      <Panel className="mx-4 sm:mx-10">
-        <FormContainer className="max-w-screen-sm mx-auto">
-          <Heading1 className="text-center">{`Are you sure you want to delete this habit?`}</Heading1>
-          <p className="text-center text-xl font-bold italic">{habit.name}</p>
+      <Panel className="mx-0 sm:mx-10 max-w-md w-full h-full">
+        <FormContainer className="w-full mx-auto bg-white h-full flex flex-col justify-between">
+          <div>
+            <Heading1 className="text-left">{`Are you sure you want to delete this habit?`}</Heading1>
+            <p className="text-center text-xl font-bold italic mt-20">
+              {habit.name}
+            </p>
+          </div>
           <FormRow className="gap-4 mt-20">
             <PrimaryButton
               onClick={() => {
