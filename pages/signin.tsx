@@ -15,7 +15,7 @@ const Signin = () => {
   const [submitting, setSubmitting] = useState(false);
   return (
     <Container>
-      <Panel className="login-panel">
+      <Panel className="max-w-md h-full w-full">
         <div className="flex flex-row w-full pt-10 px-5 md:px-10">
           {loginOrRegister === REGISTER ? (
             <PrimaryButton
