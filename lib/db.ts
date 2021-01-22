@@ -31,6 +31,11 @@ const transformFirebaseHabit = (habitDoc: DocumentData): HabitType => {
   if (toggledOn && typeof toggledOn.toDate === "function") {
     result.toggledOn = toggledOn.toDate();
   }
+  Object.entries(completed).forEach(([key, value]) => {
+    if (typeof value === "boolean") {
+      result.completed[key] = { state: value };
+    }
+  });
   return result;
 };
 

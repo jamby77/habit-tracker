@@ -36,7 +36,10 @@ export type HabitType = {
   toggledOn?: Date;
   occurrence: Occurrence;
   completed: {
-    [date: string]: boolean;
+    [date: string]: {
+      state: boolean;
+      note?: string;
+    };
   };
 };
 

@@ -37,15 +37,24 @@ const useHabitsProvider = () => {
     day: string,
     callback?: (habit: HabitType) => void
   ) => {
-    console.log(habit, day);
     // change habit complete state
     // every invocation rotate complete state
     // undefined -> true -> false -> true -> false...
-    const completed = habit.completed[day] || false;
+    let completed = habit.completed[day] || { state: false };
+    if (typeof completed === "boolean") {
+      // handle case where habit's completion was simply a flag
+      completed = { state: completed };
+    }
     const updatedHabit: HabitType = {
       ...habit,
       toggledOn: new Date(),
-      completed: { ...habit.completed, [day]: !completed },
+      completed: {
+        ...habit.completed,
+        [day]: {
+          ...completed,
+          state: !completed.state,
+        },
+      },
     };
     editHabit(updatedHabit).then(() => {
       if (callback) {
