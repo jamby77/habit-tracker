@@ -1,23 +1,27 @@
 import { format } from "date-fns";
 import React from "react";
-import { Container, Heading1 } from "~c/index";
+import TodayHabitCard from "~c/habits/TodayHabitCard";
+import { Container, Heading1, Panel } from "~c/index";
 import { useUser } from "~l/auth";
 import { getDays, today } from "~l/dates";
 import { useHabits } from "~l/HabitProvider";
+import { dateFormat } from "~l/habits";
 import { useTitle } from "~l/layout";
 
 const Today = () => {
   useTitle(today);
   const days = getDays(today, "week");
+  const dateKey = format(today, dateFormat);
   const { habits } = useHabits();
   const { user } = useUser();
+  const { toggleHabit } = useHabits();
   if (!user) {
     return null;
   }
 
   return (
     <Container>
-      <div className="max-w-md h-full w-full flex flex-col items-center">
+      <Panel className="max-w-md h-full w-full flex flex-col items-center">
         <div className="text-left w-full">
           <Heading1 className="my-4 ml-4">Today</Heading1>
         </div>
@@ -38,12 +42,21 @@ const Today = () => {
             );
           })}
         </div>
-        <div className="w-full">
+        <div className="w-full flex flex-col gap-2 mt-8">
           {habits.map((habit) => {
-            return <div key={habit.id}>{habit.name}</div>;
+            return (
+              <TodayHabitCard
+                habit={habit}
+                key={habit.id}
+                dateKey={dateKey}
+                toggleHabit={() => {
+                  toggleHabit(habit, dateKey);
+                }}
+              />
+            );
           })}
         </div>
-      </div>
+      </Panel>
     </Container>
   );
 };
