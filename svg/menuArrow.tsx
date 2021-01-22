@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ * Menu Down
+ *
+ * @see https://materialdesignicons.com/ - menu-down
+ * @param props
+ * @constructor
+ */
 const MenuArrow = (props) => {
   return (
     <svg {...props} viewBox="0 0 24 24">
