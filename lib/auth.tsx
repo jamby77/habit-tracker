@@ -5,6 +5,31 @@ import { createUser } from "./db";
 import firebase from "./firebase";
 import { useLayout } from "./layout";
 
+export interface User extends firebase.User {
+  firstName?: string;
+  lastName?: string;
+  name?: string;
+  provider?: string;
+  imageUrl?: string;
+}
+
+export interface AppUser {
+  uid: string;
+  email: string;
+  name: string;
+  firstName: string;
+  lastName: string;
+  provider: string;
+}
+
+export type UserStateType = "init" | "loggedIn" | "loggedOut";
+
+export const acctmgmtModes = {
+  RESET_PASSWORD: "resetPassword",
+  RECOVER_EMAIL: "recoverEmail",
+  VERIFY_EMAIL: "verifyEmail",
+};
+
 const authContext = createContext<{
   user?: { state: UserStateType; user: AppUser };
   signin?: (user: {
@@ -68,23 +93,6 @@ export const useUser = () => {
   return user;
 };
 
-export interface User extends firebase.User {
-  firstName?: string;
-  lastName?: string;
-  name?: string;
-  provider?: string;
-  imageUrl?: string;
-}
-
-export interface AppUser {
-  uid: string;
-  email: string;
-  name: string;
-  firstName: string;
-  lastName: string;
-  provider: string;
-}
-
 const formatUser = (user: User): AppUser => {
   return {
     uid: user.uid,
@@ -95,8 +103,6 @@ const formatUser = (user: User): AppUser => {
     provider: user.providerData[0].providerId,
   };
 };
-
-export type UserStateType = "init" | "loggedIn" | "loggedOut";
 
 function useProvideAuth() {
   const [user, setUser] = useState<{ state: UserStateType; user: AppUser }>({
@@ -139,63 +145,53 @@ function useProvideAuth() {
       });
   };
 
-  const signup = ({ email, password, firstName, lastName }) => {
-    return firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((response) => {
-        return handleUser({ ...response.user, firstName, lastName }, true);
-      })
-      .catch((err) => {
-        console.dir(err);
-        error(err.message);
-        return false;
-      });
+  const signup = async ({ email, password, firstName, lastName }) => {
+    try {
+      const response = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      return handleUser({ ...response.user, firstName, lastName }, true);
+    } catch (err) {
+      console.dir(err);
+      error(err.message);
+      return false;
+    }
   };
 
-  const signout = () => {
-    return firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        handleUser(false);
-        return true;
-      })
-      .catch((err) => {
-        console.dir(err);
-        error(err.message);
-        return false;
-      });
+  const signout = async () => {
+    try {
+      await firebase.auth().signOut();
+      handleUser(false);
+      return true;
+    } catch (err) {
+      console.dir(err);
+      error(err.message);
+      return false;
+    }
   };
 
-  const sendPasswordResetEmail = (email) => {
-    return firebase
-      .auth()
-      .sendPasswordResetEmail(email)
-      .then(() => {
-        return true;
-      })
-      .catch((err) => {
-        console.dir(err);
-        error(err.message);
-        return false;
-      });
+  const sendPasswordResetEmail = async (email) => {
+    try {
+      await firebase.auth().sendPasswordResetEmail(email);
+      return true;
+    } catch (err) {
+      console.dir(err);
+      error(err.message);
+      return false;
+    }
   };
 
-  const confirmPasswordReset = (password, code) => {
+  const confirmPasswordReset = async (password, code) => {
     const resetCode = code || getFromQueryString("oobCode");
 
-    return firebase
-      .auth()
-      .confirmPasswordReset(resetCode, password)
-      .then(() => {
-        return true;
-      })
-      .catch((err) => {
-        console.dir(err);
-        error(err.message);
-        return false;
-      });
+    try {
+      await firebase.auth().confirmPasswordReset(resetCode, password);
+      return true;
+    } catch (err) {
+      console.dir(err);
+      error(err.message);
+      return false;
+    }
   };
 
   useEffect(() => {

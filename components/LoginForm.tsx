@@ -24,7 +24,6 @@ const LoginForm = ({
 
   const handleKeydown = (event: KeyboardEvent) => {
     const { code } = event;
-    console.log(code);
     if (code === "Enter") {
       handleSubmit();
     }
