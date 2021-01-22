@@ -1,14 +1,16 @@
 import React from "react";
 
-const Plus = ({ className = "" }) => {
+/**
+ * Plus Thick
+ *
+ * @see https://materialdesignicons.com/ - plus-thick
+ * @param props
+ * @constructor
+ */
+const Plus = (props) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      enableBackground="new 0 0 24 24"
-      viewBox="0 0 24 24"
-      className={className}
-    >
-      <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
+    <svg {...props} viewBox="0 0 24 24">
+      <path fill="currentColor" d="M20 14H14V20H10V14H4V10H10V4H14V10H20V14Z" />
     </svg>
   );
 };
