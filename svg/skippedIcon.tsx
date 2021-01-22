@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ * Alert Circle
+ *
+ * @see https://materialdesignicons.com/ -alert-circle
+ * @param props
+ * @constructor
+ */
 const SkippedIcon = (props) => {
   return (
     <svg {...props} viewBox="0 0 24 24">
