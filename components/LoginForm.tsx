@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState } from "react";
 import { FormContainer, FormGroup, FormRow, Heading1 } from "~c/index";
 import { useLayout } from "~l/layout";
@@ -58,7 +59,7 @@ const LoginForm = ({
           </FormGroup>
         </FormRow>
         <FormRow>
-          <FormGroup className="mb-12">
+          <FormGroup>
             <Label htmlFor="password">Password</Label>
             <div className="flex">
               <Icon
@@ -77,6 +78,13 @@ const LoginForm = ({
                 onKeyDown={handleKeydown}
               />
             </div>
+          </FormGroup>
+        </FormRow>
+        <FormRow>
+          <FormGroup className="mb-12">
+            <Link href="/acctmgmt/forgot-password">
+              <a className="text-secondary underline">Forgot Your Password?</a>
+            </Link>
           </FormGroup>
         </FormRow>
         <FormRow>

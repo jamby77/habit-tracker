@@ -1,20 +1,47 @@
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { Icon, Input, Label, SuccessButton } from "~c/form";
 import { Container, FormContainer, FormGroup, FormRow, Panel } from "~c/index";
 import PageHeader from "~c/PageHeader";
+import { useAuth } from "~l/auth";
+import { useLayout } from "~l/layout";
 
-const ResetPasswordNewPassword = ({
-  email,
-  handleSubmit,
-  submitting = false,
-}) => {
+const ResetPasswordNewPassword = ({ code = "" }) => {
+  const router = useRouter();
+  const { success } = useLayout();
   const [pass, setPass] = useState("");
+  const [email, setEmail] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const { verifyPassResetCode, confirmPasswordReset } = useAuth();
+
+  function handleSubmit(pass: string) {
+    if (submitting) {
+      return;
+    }
+    setSubmitting(true);
+    confirmPasswordReset(pass, code)
+      .then(() => {
+        success("Password changed, please login");
+        router.push("/signin");
+      })
+      .catch(() => setSubmitting(false));
+  }
+
   const handleKeydown = (event: KeyboardEvent) => {
     const { code } = event;
     if (code === "Enter") {
       handleSubmit(pass);
     }
   };
+
+  useEffect(() => {
+    verifyPassResetCode(code).then((email) => {
+      setEmail(email);
+    });
+  }, [code]);
+  if (!email) {
+    return null;
+  }
   return (
     <Container>
       <Panel className="max-w-md h-full w-full">
