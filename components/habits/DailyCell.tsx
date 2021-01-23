@@ -21,9 +21,9 @@ const DailyCell = ({
   disabled: boolean;
   handleToggle: () => void;
 }) => {
-  const done = habit.completed[dateKey].state === true;
-  const skipped = habit.completed[dateKey].state === false;
   const unknown = habit.completed[dateKey] === undefined;
+  const done = habit.completed[dateKey]?.state === true;
+  const skipped = habit.completed[dateKey]?.state === false;
   const className = {
     "focus:ring-1 bg-white h-10 w-10 text-center flex items-center justify-center rounded-lg focus:outline-none border-2": true,
     "focus:ring-green-400 hover:bg-green-200 border-green-600 text-green-600": done,
