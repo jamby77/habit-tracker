@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ * Help circle
+ *
+ * @see https://materialdesignicons.com/ - help-circle
+ * @param props
+ * @constructor
+ */
 const UnknownIcon = (props) => {
   return (
     <svg {...props} viewBox="0 0 24 24">

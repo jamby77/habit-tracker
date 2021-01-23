@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ * Edit square
+ *
+ * @see https://materialdesignicons.com/ - square-edit-outline
+ * @param props
+ * @constructor
+ */
 const EditIcon = (props) => {
   return (
     <svg {...props} viewBox="0 0 24 24">

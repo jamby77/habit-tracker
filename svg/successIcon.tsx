@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ * Checkbox marked circle
+ *
+ * @see https://materialdesignicons.com/ - checkbox-marked-circle
+ * @param props
+ * @constructor
+ */
 const SuccessIcon = (props) => {
   return (
     <svg {...props} viewBox="0 0 24 24">
