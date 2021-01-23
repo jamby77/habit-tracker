@@ -65,6 +65,7 @@ const authContext = createContext<{
   signout?: () => Promise<boolean>;
   sendPasswordResetEmail?: (email: string) => Promise<boolean>;
   confirmPasswordReset?: (password: string, code?: string) => Promise<boolean>;
+  verifyPassResetCode?: (code?: string) => Promise<string | null>;
 }>(null);
 
 export const AuthProvider: React.FC = ({ children }) => {
@@ -181,6 +182,18 @@ function useProvideAuth() {
     }
   };
 
+  const verifyPassResetCode = async (code) => {
+    const resetCode = code || getFromQueryString("oobCode");
+
+    try {
+      return await firebase.auth().verifyPasswordResetCode(resetCode);
+    } catch (err) {
+      console.dir(err);
+      error(err.message);
+      return null;
+    }
+  };
+
   const confirmPasswordReset = async (password, code) => {
     const resetCode = code || getFromQueryString("oobCode");
 
@@ -209,6 +222,7 @@ function useProvideAuth() {
     signout,
     sendPasswordResetEmail,
     confirmPasswordReset,
+    verifyPassResetCode,
   };
 }
 
