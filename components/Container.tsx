@@ -8,7 +8,7 @@ const Container: ReactFCWithClassName = ({ children, className, ...rest }) => {
       {...rest}
       className={cn(
         "Container",
-        "min-w-full min-h-full w-full h-full bg-red-100 flex items-center justify-center",
+        "min-w-full min-h-full w-full h-full bg-red-50 flex items-center justify-center",
         className
       )}
     >

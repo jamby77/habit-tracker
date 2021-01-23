@@ -9,6 +9,7 @@ import {
   Panel,
 } from "~c/index";
 import { Occurrence } from "~l/habits";
+import { getHslBackgroundColor, getRandomInt } from "../../utils/helper";
 import { Icon, Input, Label, SuccessButton, Textarea } from "../form";
 
 const Form = ({ initialHabit, handleSubmit, submitting }) => {
@@ -19,17 +20,24 @@ const Form = ({ initialHabit, handleSubmit, submitting }) => {
       handleSubmit(habit);
     }
   };
+  const tint = getRandomInt(360);
+
   return (
     <Container>
-      <Panel className="mx-4 sm:mx-10">
-        <FormContainer>
-          <div className="text-center mb-10">
-            <Heading1 className="text-center">
-              {habit.uid ? `Edit "${habit.name}"` : "Add habit"}
-            </Heading1>
-            <p>Enter habit details and save it</p>
-          </div>
-          <FormRow>
+      <Panel className="mx-0 max-w-md w-full h-full">
+        <header
+          className="text-left px-4 py-10"
+          style={{
+            backgroundColor: getHslBackgroundColor(tint),
+          }}
+        >
+          <Heading1 className="text-left">
+            {habit.uid ? habit.name : "Add habit"}
+          </Heading1>
+          <p>Enter habit details and save it</p>
+        </header>
+        <FormContainer className="bg-white">
+          <FormRow className=" pt-8">
             <FormGroup>
               <Label htmlFor="habitName">Habit name *</Label>
               <div className="flex">
@@ -51,7 +59,7 @@ const Form = ({ initialHabit, handleSubmit, submitting }) => {
               </div>
             </FormGroup>
           </FormRow>
-          <FormRow>
+          <FormRow className="">
             <FormGroup>
               <Label htmlFor="habitDescription">Habit description</Label>
               <div className="flex">
@@ -68,7 +76,7 @@ const Form = ({ initialHabit, handleSubmit, submitting }) => {
               </div>
             </FormGroup>
           </FormRow>
-          <FormRow>
+          <FormRow className="">
             <FormGroup>
               <Label htmlFor="habitName">Habit occurs</Label>
               <div className="flex">
@@ -89,7 +97,7 @@ const Form = ({ initialHabit, handleSubmit, submitting }) => {
               </div>
             </FormGroup>
           </FormRow>
-          <FormRow>
+          <FormRow className="">
             <FormGroup>
               <SuccessButton
                 onClick={() => handleSubmit(habit)}

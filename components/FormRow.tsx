@@ -4,7 +4,7 @@ import { ReactFCWithClassName } from "./index";
 
 const FromRow: ReactFCWithClassName = ({ children, className, ...rest }) => {
   return (
-    <div {...rest} className={cn("FromRow flex -mx-3", className)}>
+    <div {...rest} className={cn("FromRow flex w-full", className)}>
       {children}
     </div>
   );
