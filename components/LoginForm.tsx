@@ -31,7 +31,7 @@ const LoginForm = ({
   };
   return (
     <FormContainer className="LoginForm">
-      <div className="text-center mb-10">
+      <div className="text-center my-10">
         <Heading1>Log In</Heading1>
         <p>Welcome Back!</p>
       </div>
