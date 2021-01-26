@@ -34,11 +34,11 @@ const Display = ({ type }: { type: HabitDisplayType }) => {
   return (
     <Container>
       <Panel className="max-w-md h-full w-full">
-        <div className="DisplayHabits bg-white mx-auto overflow-hidden h-full w-full">
+        <div className="DisplayHabits bg-white mx-auto h-full w-full">
           <PageHeader
             title={`Daily habits (${type === "week" ? "weekly" : "monthly"})`}
           />
-          <div className="tracker overflow-hidden w-full h-full flex flex-col">
+          <div className="tracker w-full h-full flex flex-col">
             <div className="tracker-heading w-full flex flex-col px-4 pt-6 gap-1">
               <div className="flex flex-row h-8 w-full">
                 <div className="w-1/2 sm:w-40" />
@@ -52,6 +52,7 @@ const Display = ({ type }: { type: HabitDisplayType }) => {
                 </div>
                 {sortedHabits.map((habit) => {
                   const tint = getRandomInt(360);
+                  habit["tint"] = tint;
                   return (
                     <HabitRowName
                       tint={tint}
@@ -61,7 +62,7 @@ const Display = ({ type }: { type: HabitDisplayType }) => {
                   );
                 })}
               </div>
-              <div className="habit-days overflow-x-auto overscroll-x-contain flex flex-col flex-grow pl-2">
+              <div className="habit-days overflow-x-auto flex flex-col flex-grow">
                 <DaysHeading days={days} />
                 {sortedHabits.map((habit) => {
                   return (
