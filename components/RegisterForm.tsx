@@ -34,7 +34,7 @@ const RegisterForm = ({
 
   return (
     <FormContainer className="RegisterForm">
-      <div className="text-center mb-10">
+      <div className="text-center my-10">
         <Heading1>Register</Heading1>
         <p>Enter your information to register</p>
       </div>
