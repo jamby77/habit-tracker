@@ -37,7 +37,7 @@ const Form = ({ initialHabit, handleSubmit, submitting }) => {
           <p>Enter habit details and save it</p>
         </header>
         <FormContainer className="bg-white">
-          <FormRow className=" pt-8">
+          <FormRow className="pt-8">
             <FormGroup>
               <Label htmlFor="habitName">Habit name *</Label>
               <div className="flex">
