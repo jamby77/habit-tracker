@@ -1,5 +1,5 @@
-import Image from "next/image";
 import React from "react";
+import ProfilePictureWidget from "~c/auth/ProfilePictureWidget";
 import { Icon, Input, Label } from "~c/form";
 import Form from "~c/form/Form";
 import {
@@ -28,16 +28,8 @@ const Profile = () => {
           <FormContainer className="max-w-lg mx-auto">
             <FormRow>
               <FormGroup>
-                <Label htmlFor="email">Profile Picture</Label>
-                <div className="flex">
-                  <Image
-                    alt={user.firstName}
-                    width={300}
-                    height={300}
-                    className="rounded-full"
-                    src={`https://unavatar.now.sh/${user.email}`}
-                  />
-                </div>
+                <Label htmlFor="profile_pic">Profile Picture</Label>
+                <ProfilePictureWidget user={user} />
               </FormGroup>
             </FormRow>
             <FormRow>
