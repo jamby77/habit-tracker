@@ -16,21 +16,6 @@ import { getRandomInt } from "../../utils/helper";
 const Display = ({ type }: { type: HabitDisplayType }) => {
   const { habits } = useHabits();
   const days = getDays(today, type);
-  const sortedHabits = [...habits];
-  sortedHabits.sort((hA, hB) => {
-    const { toggledOn: a } = hA;
-    const { toggledOn: b } = hB;
-    if (!a && !b) {
-      return 0;
-    }
-    if (!a) {
-      return 1;
-    }
-    if (!b) {
-      return -1;
-    }
-    return a.getTime() - b.getTime();
-  });
   return (
     <Container>
       <Panel className="max-w-md h-full w-full">
@@ -50,7 +35,7 @@ const Display = ({ type }: { type: HabitDisplayType }) => {
                 <div className="space w-full h-16 font-bold flex items-center justify-center">
                   Habits
                 </div>
-                {sortedHabits.map((habit) => {
+                {habits.map((habit) => {
                   const tint = getRandomInt(360);
                   habit["tint"] = tint;
                   return (
@@ -64,7 +49,7 @@ const Display = ({ type }: { type: HabitDisplayType }) => {
               </div>
               <div className="habit-days overflow-x-auto flex flex-col flex-grow">
                 <DaysHeading days={days} />
-                {sortedHabits.map((habit) => {
+                {habits.map((habit) => {
                   return (
                     <HabitRowDays
                       key={`days-${habit.name}`}

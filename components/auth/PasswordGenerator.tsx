@@ -1,5 +1,6 @@
 import { createRef, useEffect, useState } from "react";
 import zxcvbn from "zxcvbn";
+import { PrimaryButton } from "~c/form";
 
 const chars = {
   lower: "abcdefghijklmnopqrstuvwxyz",
@@ -185,6 +186,11 @@ const PasswordGenerator = () => {
             <span className="text-xs font-semibold text-gray-500">SYMBOLS</span>
           </label>
         </div>
+      </div>
+      <div className="flex justify-end mt-4">
+        <PrimaryButton onClick={() => generatePassword()}>
+          Regenerate
+        </PrimaryButton>
       </div>
     </div>
   );
