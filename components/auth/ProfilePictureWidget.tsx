@@ -1,25 +1,26 @@
 import React, { useRef, useState } from "react";
 import { Button, WarningButton } from "~c/form";
-import { AppUser } from "~l/auth";
+import { AppUser, CloudinaryPic } from "~l/auth";
 import UploadIcon from "~s/uploadIcon";
 
 const cloudinaryUser = process.env.NEXT_PUBLIC_CLOUDINARY_USER;
 const cloudinaryPreset = process.env.NEXT_PUBLIC_CLOUDINARY_PROFILE_PRESET;
 const cloudinaryEndpoint = `https://api.cloudinary.com/v1_1/${cloudinaryUser}/image/upload`;
 
-const ProfilePictureWidget = ({ user }: { user: AppUser }) => {
-  const [pic, setPic] = useState("");
+const ProfilePictureWidget = ({
+  user,
+  handlePicChange,
+}: {
+  user: AppUser;
+  handlePicChange: (pic: CloudinaryPic) => void;
+}) => {
+  const [pic, setPic] = useState(user?.profilePic?.secure_url || "");
   const imgRef = useRef<HTMLInputElement>();
-  // upload image to cloudinary,
-  // see what the response is,
-  // set it as sub-object of the user,
-  // display it, by using setPic
   const handleImageUpload = async () => {
     const { files } = imgRef.current;
     if (files.length === 0) {
       return;
     }
-    console.log(files[0]);
     const formData = new FormData();
     formData.append("file", files[0]);
     formData.append("upload_preset", cloudinaryPreset);
@@ -29,17 +30,21 @@ const ProfilePictureWidget = ({ user }: { user: AppUser }) => {
     };
 
     try {
+      // upload image to cloudinary,
       const response = await fetch(cloudinaryEndpoint, options).then((res) =>
         res.json()
       );
-      console.log(response);
+
+      // set it as sub-object of the user,
+      handlePicChange(response as CloudinaryPic);
+      // display it, by using setPic
+      setPic(response.secure_url);
     } catch (e) {
       console.info(e);
     }
   };
   const handleImageChange = () => {
     const { files } = imgRef.current;
-    console.log(files[0]);
     if (files[0] && window) {
       const s = window.URL.createObjectURL(files[0]);
       setPic(s);

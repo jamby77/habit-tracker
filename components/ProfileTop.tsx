@@ -8,6 +8,8 @@ const ProfileTop = () => {
     user: { user },
     signout,
   } = useAuth();
+  const profilePicSrc =
+    user?.profilePic?.secure_url || `https://unavatar.now.sh/${user.email}`;
   return (
     <div className="flex flex-col items-center">
       <Link href="/acctmgmt/profile">
@@ -17,7 +19,7 @@ const ProfileTop = () => {
             width={40}
             height={40}
             className="rounded-full"
-            src={`https://unavatar.now.sh/${user.email}`}
+            src={profilePicSrc}
           />
         </a>
       </Link>

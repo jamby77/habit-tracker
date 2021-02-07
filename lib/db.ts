@@ -1,4 +1,5 @@
 import { DocumentData } from "@firebase/firestore-types";
+import { AppUser } from "~l/auth";
 import firebase from "./firebase";
 import { HabitType } from "./habits";
 
@@ -13,10 +14,19 @@ export function createUser(uid, data) {
     .doc(uid)
     .set({ uid, ...data }, { merge: true });
 }
+export async function loadUser(uid) {
+  const user = await db.collection(COLLECTION_USERS).doc(uid).get();
+  return user.data();
+}
+
+export function userUpdate(user: AppUser) {
+  return db.collection(COLLECTION_USERS).doc(user.uid).update(user);
+}
 
 function getHabitsCollection() {
   return db.collection(COLLECTION_HABITS);
 }
+
 const transformFirebaseHabit = (habitDoc: DocumentData): HabitType => {
   const data = habitDoc.data();
   const id = habitDoc.id;

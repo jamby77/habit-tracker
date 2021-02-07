@@ -1,16 +1,33 @@
 import { useRouter } from "next/router";
 import queryString from "query-string";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { createUser } from "./db";
+import { createUser, loadUser, userUpdate } from "./db";
 import firebase from "./firebase";
 import { useLayout } from "./layout";
 
+export type CloudinaryPic = {
+  access_mode: string;
+  asset_id: string;
+  bytes: number;
+  created_at: string;
+  etag: string;
+  format: string;
+  height: number;
+  original_filename: string;
+  public_id: string;
+  secure_url: string;
+  signature: string;
+  version: number;
+  version_id: string;
+  width: number;
+};
 export interface User extends firebase.User {
   firstName?: string;
   lastName?: string;
   name?: string;
   provider?: string;
   imageUrl?: string;
+  profilePic?: CloudinaryPic;
 }
 
 export interface AppUser {
@@ -20,6 +37,7 @@ export interface AppUser {
   firstName: string;
   lastName: string;
   provider: string;
+  profilePic?: CloudinaryPic;
 }
 
 export type UserStateType = "init" | "loggedIn" | "loggedOut";
@@ -66,6 +84,7 @@ const authContext = createContext<{
   sendPasswordResetEmail?: (email: string) => Promise<boolean>;
   confirmPasswordReset?: (password: string, code?: string) => Promise<boolean>;
   verifyPassResetCode?: (code?: string) => Promise<string | null>;
+  updateUser?: (user: AppUser) => Promise<boolean>;
 }>(null);
 
 export const AuthProvider: React.FC = ({ children }) => {
@@ -102,6 +121,7 @@ const formatUser = (user: User): AppUser => {
     firstName: user.firstName,
     lastName: user.lastName,
     provider: user.providerData[0].providerId,
+    profilePic: user.profilePic,
   };
 };
 
@@ -117,13 +137,19 @@ function useProvideAuth() {
       const user = formatUser(rawUser);
       if (create) {
         createUser(user.uid, user)
-          .then(() => setUser({ state: "loggedIn", user }))
+          .then(() => {
+            loadUser(user.uid).then((user) =>
+              setUser({ state: "loggedIn", user: user as AppUser })
+            );
+          })
           .catch((err) => {
             console.dir(err);
             error(err.message);
           });
       } else {
-        setUser({ state: "loggedIn", user });
+        loadUser(user.uid).then((user) =>
+          setUser({ state: "loggedIn", user: user as AppUser })
+        );
       }
       return user;
     }
@@ -207,6 +233,15 @@ function useProvideAuth() {
     }
   };
 
+  const updateUser = (user: AppUser) => {
+    return userUpdate(user)
+      .then(() => {
+        setUser((prevState) => ({ ...prevState, user }));
+        return true;
+      })
+      .catch(() => false);
+  };
+
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       handleUser(user);
@@ -223,6 +258,7 @@ function useProvideAuth() {
     sendPasswordResetEmail,
     confirmPasswordReset,
     verifyPassResetCode,
+    updateUser,
   };
 }
 

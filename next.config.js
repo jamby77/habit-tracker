@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domains: ["unavatar.now.sh", "localhost"],
+    domains: ["unavatar.now.sh", "res.cloudinary.com"],
   },
 };

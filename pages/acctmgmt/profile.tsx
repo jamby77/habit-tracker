@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProfilePictureWidget from "~c/auth/ProfilePictureWidget";
-import { Icon, Input, Label } from "~c/form";
+import { Icon, Input, Label, SuccessButton } from "~c/form";
 import Form from "~c/form/Form";
 import {
   Container,
@@ -10,26 +10,49 @@ import {
   Heading1,
   Panel,
 } from "~c/index";
-import { useUser } from "~l/auth";
-import { useTitle } from "~l/layout";
+import { AppUser, useAuth, useUser } from "~l/auth";
+import { useLayout, useTitle } from "~l/layout";
 
 const Profile = () => {
   useTitle("Edit profile");
   const { user } = useUser();
+  const { updateUser } = useAuth();
+  const { success } = useLayout();
+  const [update, setUpdate] = useState<AppUser>();
+  useEffect(() => {
+    if (!user) return;
+    setUpdate({ ...user });
+  }, [user]);
   if (!user) {
     return null;
   }
-  console.log(user);
   return (
     <Container>
       <Panel className="h-full">
         <Heading1 className="ml-4 mt-4">User profile</Heading1>
-        <Form onSubmit={(form) => console.log(form)}>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            update.email = e.target["email"].value;
+            update.firstName = e.target["firstName"].value;
+            update.lastName = e.target["lastName"].value;
+            console.dir(update);
+            updateUser(update).then(() => success("Profile updated"));
+          }}
+        >
           <FormContainer className="max-w-lg mx-auto">
             <FormRow>
               <FormGroup>
-                <Label htmlFor="profile_pic">Profile Picture</Label>
-                <ProfilePictureWidget user={user} />
+                <ProfilePictureWidget
+                  user={user}
+                  handlePicChange={(pic) => {
+                    success("Profile picture changed");
+                    setUpdate((prevState) => ({
+                      ...prevState,
+                      profilePic: pic,
+                    }));
+                  }}
+                />
               </FormGroup>
             </FormRow>
             <FormRow>
@@ -83,6 +106,11 @@ const Profile = () => {
                     className="disabled:cursor-not-allowed"
                   />
                 </div>
+              </FormGroup>
+            </FormRow>
+            <FormRow>
+              <FormGroup>
+                <SuccessButton type="submit">Update Profile</SuccessButton>
               </FormGroup>
             </FormRow>
           </FormContainer>
